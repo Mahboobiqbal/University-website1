@@ -4,7 +4,7 @@ import * as React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { CalendarDays, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
+import { CalendarDays, ChevronLeft, ChevronRight } from "lucide-react";
 import { EVENTS } from "@/data/home";
 
 export const EventsSection = () => {

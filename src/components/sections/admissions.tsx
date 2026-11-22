@@ -16,6 +16,10 @@ import {
   Mail,
 } from "lucide-react";
 import { DEPARTMENTS } from "@/data/departments";
+import {
+  ADMISSION_NOTICES,
+  slugifyAdmissionProgram,
+} from "@/data/admissions";
 
 type AdmissionLevel = "Undergraduate" | "MS/MPhil" | "PhD";
 
@@ -52,32 +56,12 @@ const programLevelValues: Record<string, AdmissionLevel> = {
   phd: "PhD",
 };
 
-const announcements = [
-  {
-    title: "Current Admission Announcement",
-    body: "Confirm the latest University of Swat admission notice, application window, and official instructions before applying.",
-  },
-  {
-    title: "Undergraduate Admission Schedule",
-    body: "Opening date, closing date, fee deadline, and class commencement dates are available only in the current official admission notice.",
-  },
-  {
-    title: "MS/MPhil Admission Schedule",
-    body: "Application dates, admission test date, interview schedule, merit list, fee deadline, and class commencement will be published with the official postgraduate notice.",
-  },
-  {
-    title: "PhD Admission Schedule",
-    body: "Application dates, admission test date, research evaluation/interview, merit list, and fee deadline will be published with the official PhD notice.",
-  },
-  {
-    title: "Scholarship Announcements",
-    body: "Merit-based scholarships and need-based financial assistance are administered according to current university policies and official announcements.",
-  },
-  {
-    title: "Important Admission Notices",
-    body: "Applicants should verify eligibility, required documents, deadlines, and fee structure from the latest official University of Swat notice.",
-  },
-];
+const announcements = ADMISSION_NOTICES.map((notice) => ({
+  title: notice.title,
+  body: notice.detail,
+  href: notice.href,
+  status: notice.status,
+}));
 
 const documentLists: Record<AdmissionLevel, string[]> = {
   Undergraduate: [
@@ -115,17 +99,17 @@ const faqs = [
   {
     question: "Is an entry test required for BS admissions?",
     answer:
-      "NO ENTRY TEST REQUIRED FOR BS ADMISSIONS. Undergraduate applicants should follow the eligibility and merit criteria stated in the official notice.",
+      "Undergraduate applicants should follow the requirements in the current BS admission notice. Do not assume that postgraduate test requirements apply to undergraduate programmes.",
   },
   {
     question: "Is an entry test required for MS/MPhil admissions?",
     answer:
-      "Yes. An admission entry test is required for MS/MPhil applicants, followed by applicable interview or merit procedures.",
+      "Test requirements depend on the current programme admission notice. A current test-subject list and exemption policy were not verified in the official material reviewed.",
   },
   {
     question: "Is an entry test required for PhD admissions?",
     answer:
-      "Yes. PhD applicants are generally required to complete the admission test and research evaluation/interview process under the current university policy.",
+      "Test and research evaluation requirements depend on the current PhD admission notice. A current test-subject list and exemption policy were not verified in the official material reviewed.",
   },
   {
     question: "How can I check the merit list?",
@@ -162,7 +146,8 @@ export function AdmissionsSection({ compact = false }: { compact?: boolean }) {
         dept.programs.map((program) => ({
           ...program,
           department: dept.name,
-          href: dept.href,
+          departmentId: dept.id,
+          href: `/admissions/program/${dept.id}/${slugifyAdmissionProgram(program.name)}?campus=main-campus`,
         }))
       ),
     []
@@ -243,7 +228,7 @@ export function AdmissionsSection({ compact = false }: { compact?: boolean }) {
             ))}
           </div>
           <p className="mt-5 text-center text-sm font-semibold tracking-wide text-white">
-            NO ENTRY TEST REQUIRED FOR BS ADMISSIONS
+            Follow the requirements published for your programme and admission intake.
           </p>
         </div>
       </section>
@@ -264,13 +249,13 @@ export function AdmissionsSection({ compact = false }: { compact?: boolean }) {
             <div className="absolute inset-0 bg-[#17231d]/20" />
             <div className="absolute bottom-0 left-0 max-w-md bg-[#233623] p-6 text-white sm:p-8">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
-                Admissions 2027
+                Official University of Swat information
               </p>
               <h3 className="mt-2 text-2xl font-light sm:text-3xl">
                 Find the program that fits your goals
               </h3>
               <Link
-                href="/programs"
+                href="/admissions/undergraduate"
                 className="mt-5 inline-flex items-center gap-2 border-b border-white/70 pb-1 text-sm font-medium"
               >
                 Explore programs <ArrowRight aria-hidden="true" size={16} />
@@ -288,7 +273,12 @@ export function AdmissionsSection({ compact = false }: { compact?: boolean }) {
                     aria-expanded={open}
                     className="flex w-full items-center justify-between gap-4 py-5 text-left text-sm font-semibold sm:text-base"
                   >
-                    {item.title}
+                    <span>
+                      {item.title}
+                      <span className="mt-1 block text-xs font-normal text-white/60">
+                        {item.status}
+                      </span>
+                    </span>
                     <ChevronDown
                       aria-hidden="true"
                       size={18}
@@ -296,7 +286,17 @@ export function AdmissionsSection({ compact = false }: { compact?: boolean }) {
                     />
                   </button>
                   {open && (
-                    <p className="pb-5 text-sm leading-relaxed text-white/75">{item.body}</p>
+                    <div className="pb-5 text-sm leading-relaxed text-white/75">
+                      <p>{item.body}</p>
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 inline-flex items-center gap-1 font-medium text-white underline underline-offset-4"
+                      >
+                        Read official notice <ArrowUpRight aria-hidden="true" size={14} />
+                      </a>
+                    </div>
                   )}
                 </div>
               );
@@ -328,7 +328,7 @@ export function AdmissionsSection({ compact = false }: { compact?: boolean }) {
             ))}
           </ol>
           <p className="mt-5 text-sm leading-relaxed text-gray-600">
-            MS/MPhil and PhD applicants may also complete an admission test and interview/research evaluation. This step is not required for BS admissions.
+            Selection, tests, and interviews are determined by the current official notice for each programme and level. Do not apply postgraduate test rules to undergraduate admissions.
           </p>
         </div>
       </section>
@@ -416,7 +416,7 @@ export function AdmissionsSection({ compact = false }: { compact?: boolean }) {
                   href={program.href}
                   className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-brand"
                 >
-                  View department <ArrowUpRight aria-hidden="true" size={15} />
+                  View admission details <ArrowUpRight aria-hidden="true" size={15} />
                 </Link>
               </article>
             ))}
@@ -430,9 +430,9 @@ export function AdmissionsSection({ compact = false }: { compact?: boolean }) {
             Undergraduate
           </p>
           <h3 className="text-3xl font-light text-charcoal">BS Admissions</h3>
-          <p className="mt-5 font-semibold text-[#233623]">NO ENTRY TEST REQUIRED FOR BS ADMISSIONS</p>
+          <p className="mt-5 font-semibold text-[#233623]">Check the current undergraduate admission notice</p>
           <p className="mt-3 leading-relaxed text-gray-600">
-            BS applicants should review the academic qualification, department requirements, and official admission notice. Undergraduate documents, fee, schedule, and scholarships are published with the current notice.
+            BS applicants should review the programme availability, eligibility, selection process, required documents, fees, and deadlines in the official intake notice.
           </p>
         </div>
         <div id="postgraduate" className="bg-[#233623] px-6 py-14 text-white sm:px-10 lg:px-[clamp(3rem,7vw,7rem)]">
@@ -440,9 +440,9 @@ export function AdmissionsSection({ compact = false }: { compact?: boolean }) {
             Postgraduate
           </p>
           <h3 id="phd" className="text-3xl font-light">MS/MPhil & PhD Admissions</h3>
-          <p className="mt-5 font-semibold text-white">ADMISSION ENTRY TEST REQUIRED</p>
+          <p className="mt-5 font-semibold text-white">Programme-specific test requirements</p>
           <p className="mt-3 leading-relaxed text-white/75">
-            MS/MPhil and PhD applicants must complete the admission test and applicable interview or research evaluation process. Review the official schedule and requirements for the current intake.
+            MS/MPhil and PhD test requirements, subjects, exemptions, and evaluation stages must be confirmed from the relevant current admission notice.
           </p>
         </div>
       </section>
@@ -494,8 +494,8 @@ export function AdmissionsSection({ compact = false }: { compact?: boolean }) {
             <h3 className="text-3xl font-light text-charcoal">Financial assistance</h3>
             <div className="mt-6 grid gap-4">
               {[
-                ["Merit-based scholarships", "Awards may be offered according to current university merit policies."],
-                ["Need-based assistance", "Financial support may be available for eligible students under current official schemes."],
+                ["KPEF Merit-cum-Inaffordability Scheme 2025–26", "The University published this scheme in November 2026. Verify the notice for eligibility and application-window status."],
+                  ["HEC Need-Based Scholarships", "HEC need-based schemes are announced through separate University notices. Check the latest announcement before applying."],
               ].map(([title, body]) => (
                 <div key={title} className="border-l-2 border-brand bg-white p-5">
                   <h4 className="font-medium text-charcoal">{title}</h4>
@@ -504,16 +504,16 @@ export function AdmissionsSection({ compact = false }: { compact?: boolean }) {
               ))}
             </div>
             <div className="mt-6 grid grid-cols-2 gap-3 text-sm">
-              <Link href="/admissions#program-finder" className="flex items-center gap-2 border border-gray-200 bg-white p-4 text-charcoal hover:border-brand hover:text-brand">
+              <Link href="/admissions/information/important-dates" className="flex items-center gap-2 border border-gray-200 bg-white p-4 text-charcoal hover:border-brand hover:text-brand">
                 <CalendarDays aria-hidden="true" size={17} /> Admission schedule
               </Link>
-              <Link href="/downloads" className="flex items-center gap-2 border border-gray-200 bg-white p-4 text-charcoal hover:border-brand hover:text-brand">
+              <Link href="/admissions/information/sample-papers" className="flex items-center gap-2 border border-gray-200 bg-white p-4 text-charcoal hover:border-brand hover:text-brand">
                 <FileText aria-hidden="true" size={17} /> Downloads
               </Link>
-              <Link href="/programs" className="flex items-center gap-2 border border-gray-200 bg-white p-4 text-charcoal hover:border-brand hover:text-brand">
+              <Link href="/admissions/information/scholarships" className="flex items-center gap-2 border border-gray-200 bg-white p-4 text-charcoal hover:border-brand hover:text-brand">
                 <BadgeCheck aria-hidden="true" size={17} /> Find a program
               </Link>
-              <Link href="/contact" className="flex items-center gap-2 border border-gray-200 bg-white p-4 text-charcoal hover:border-brand hover:text-brand">
+              <Link href="/admissions/information/contact" className="flex items-center gap-2 border border-gray-200 bg-white p-4 text-charcoal hover:border-brand hover:text-brand">
                 <Mail aria-hidden="true" size={17} /> Contact admissions
               </Link>
             </div>

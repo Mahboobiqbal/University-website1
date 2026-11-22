@@ -1,16 +1,11 @@
-import { AdmissionsSection } from "@/components/sections/admissions";
-import { InnerPageLayout } from "@/components/layout/inner-page-layout";
+import { AdmissionsLanding } from "@/components/admissions/bahria-admissions-landing";
 
 export const metadata = {
   title: "Admissions | University of Swat",
   description:
-    "Explore undergraduate, MS/MPhil, and PhD admissions, programs, documents, and application guidance at the University of Swat.",
+    "Explore undergraduate, Masters and PhD admission pathways, campus-wise programmes, entry test rules, fee structures and important dates.",
 };
 
 export default function AdmissionsPage() {
-  return (
-    <InnerPageLayout className="!bg-white">
-      <AdmissionsSection />
-    </InnerPageLayout>
-  );
+  return <AdmissionsLanding />;
 }

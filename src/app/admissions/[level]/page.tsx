@@ -1,25 +1,24 @@
 import { notFound } from "next/navigation";
+import { AdmissionRoadmapBahria } from "@/components/admissions/bahria-roadmap";
 import {
-  AdmissionRoadmap,
+  LEVEL_LABELS,
+  ROADMAPS,
   type AdmissionLevel,
-} from "@/components/admissions/admission-roadmap";
+} from "@/data/bahria-admissions";
 
 interface Props {
   params: Promise<{ level: string }>;
+  searchParams: Promise<{ campus?: string }>;
 }
 
 const levels: Record<string, AdmissionLevel> = {
-  undergraduate: "Undergraduate",
-  masters: "MS/MPhil",
-  phd: "PhD",
+  undergraduate: "undergraduate",
+  masters: "masters",
+  phd: "phd",
 };
 
 export function generateStaticParams() {
-  return [
-    { level: "undergraduate" },
-    { level: "masters" },
-    { level: "phd" },
-  ];
+  return Object.keys(levels).map((level) => ({ level }));
 }
 
 export async function generateMetadata({ params }: Props) {
@@ -27,14 +26,20 @@ export async function generateMetadata({ params }: Props) {
   const admissionLevel = levels[level];
   return {
     title: admissionLevel
-      ? `${admissionLevel} Admissions | University of Swat`
+      ? `${LEVEL_LABELS[admissionLevel]} | University of Swat`
       : "Admissions | University of Swat",
   };
 }
 
-export default async function AdmissionLevelPage({ params }: Props) {
+export default async function AdmissionLevelPage({ params, searchParams }: Props) {
   const { level } = await params;
+  const { campus } = await searchParams;
   const admissionLevel = levels[level];
   if (!admissionLevel) notFound();
-  return <AdmissionRoadmap level={admissionLevel} />;
+
+  const initialCampus = ROADMAPS[admissionLevel].some((item) => item.id === campus)
+    ? campus
+    : undefined;
+
+  return <AdmissionRoadmapBahria level={admissionLevel} initialCampus={initialCampus} />;
 }

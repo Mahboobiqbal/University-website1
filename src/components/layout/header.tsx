@@ -4,7 +4,7 @@ import * as React from "react";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
@@ -73,12 +73,12 @@ function UniversityWordmark({ drawer = false, dark = false }: { drawer?: boolean
 }
 
 const NAV_ORDER = [
-  { index: 0, label: "About" },
-  { index: 4, label: "Life at University" },
-  { index: 1, label: "Academics" },
-  { index: 2, label: "Research" },
-  { index: 3, label: "Innovation" },
-];
+  { href: "/about", label: "About" },
+  { href: "/student-life", label: "Life at University" },
+  { href: "/academics", label: "Academics" },
+  { href: "/research", label: "Research" },
+  { href: "/administration", label: "Administration" },
+] as const;
 
 function isNavActive(item: NavItem, pathname: string): boolean {
   const href = item.href;
@@ -93,6 +93,7 @@ function isNavActive(item: NavItem, pathname: string): boolean {
 
 export const Header = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const { language, setLanguage } = useLanguage();
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
@@ -100,11 +101,41 @@ export const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const searchTriggerRef = useRef<HTMLButtonElement | null>(null);
   const [langOpen, setLangOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
   const [highContrast, setHighContrast] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(143);
   const headerRef = useRef<HTMLElement>(null);
+
+  const restoreSearchFocus = React.useCallback(() => {
+    const stored = searchTriggerRef.current;
+    const trigger =
+      stored && document.contains(stored)
+        ? stored
+        : document.querySelector<HTMLButtonElement>('button[aria-label="Open search"]');
+    trigger?.focus();
+  }, []);
+
+  const closeSearch = React.useCallback(() => {
+    setSearchOpen(false);
+    restoreSearchFocus();
+  }, [restoreSearchFocus]);
+
+  const openSearch = (trigger?: HTMLButtonElement) => {
+    if (trigger) searchTriggerRef.current = trigger;
+    setSearchQuery("");
+    setSearchOpen(true);
+  };
+
+  const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const query = searchQuery.trim();
+    setSearchOpen(false);
+    router.push(query ? `/search?q=${encodeURIComponent(query)}` : "/search");
+    restoreSearchFocus();
+  };
 
   useEffect(() => {
     const updateScrollState = () => setScrolled(window.scrollY > 50);
@@ -141,7 +172,7 @@ export const Header = () => {
         setOpenMenu(null);
         setLangOpen(false);
         setUserOpen(false);
-        setSearchOpen(false);
+        if (searchOpen) closeSearch();
         setMobileOpen(false);
       }
     };
@@ -151,7 +182,7 @@ export const Header = () => {
       document.removeEventListener("mousedown", onOutside);
       document.removeEventListener("keydown", onKey);
     };
-  }, []);
+  }, [closeSearch, searchOpen]);
 
   const atHeroTop = isHome && !scrolled && !mobileOpen && !highContrast;
 
@@ -160,7 +191,7 @@ export const Header = () => {
     "Life at University": "جامعہ میں زندگی",
     Academics: "تعلیم",
     Research: "تحقیق",
-    Innovation: "جدت",
+    Administration: "انتظامیہ",
   };
   const urduTopLabels: Record<string, string> = {
     Newsroom: "نیوز روم",
@@ -168,10 +199,16 @@ export const Header = () => {
     Careers: "وظائف",
     "Contact Us": "رابطہ",
   };
-  const navItems = NAV_ORDER.map(({ index, label }) => ({
-    ...NAVIGATION.main[index],
-    label: language === "ur" ? urduNavLabels[label] || label : label,
-  })) as NavItem[];
+  const navItems = NAV_ORDER.flatMap(({ href, label }) => {
+    const item = NAVIGATION.main.find((entry) => entry.href === href);
+    if (!item) return [];
+    return [
+      {
+        ...item,
+        label: language === "ur" ? urduNavLabels[label] ?? label : label,
+      },
+    ];
+  });
 
   return (
     <>
@@ -374,8 +411,9 @@ export const Header = () => {
 
                 <button
                   type="button"
-                  onClick={() => setSearchOpen(true)}
+                  onClick={(event) => openSearch(event.currentTarget)}
                   aria-label="Open search"
+                  aria-expanded={searchOpen}
                   className={cn(
                     "hidden h-12 items-center justify-center border-l px-4 transition-colors duration-200 hover:text-[#74201e] xl:inline-flex",
                     atHeroTop ? "border-white/20 text-white/90" : "border-gray-200 text-charcoal"
@@ -444,8 +482,9 @@ export const Header = () => {
 
                 <button
                   type="button"
-                  onClick={() => setSearchOpen(true)}
+                  onClick={(event) => openSearch(event.currentTarget)}
                   aria-label="Open search"
+                  aria-expanded={searchOpen}
                   className={cn(
                     "inline-flex items-center justify-center rounded-md p-2 transition-colors hover:text-[#74201e] xl:hidden",
                     atHeroTop ? "text-white" : "text-charcoal"
@@ -492,22 +531,47 @@ export const Header = () => {
             <div className="flex items-center justify-between px-6 lg:px-10 py-5 border-b border-white/15">
               <span className="text-xs uppercase tracking-widest text-white/60">Search</span>
               <button
-                onClick={() => setSearchOpen(false)}
+                type="button"
+                onClick={closeSearch}
                 aria-label="Close search"
                 className="inline-flex items-center justify-center rounded-md text-white transition-colors hover:text-[#d79a97]"
               >
                 <X size={24} strokeWidth={ICON_STROKE} />
               </button>
             </div>
-            <div className="flex-1 px-6 lg:px-10 pt-10">
-              <input
-                type="text"
-                placeholder="What are you looking for?"
-                aria-label="Search the university website"
-                autoFocus
-                className="w-full max-w-3xl bg-transparent text-2xl lg:text-4xl font-light text-white placeholder-white/40 border-b border-white/30 focus:outline-none pb-4"
-              />
-            </div>
+            <form
+              onSubmit={handleSearchSubmit}
+              role="search"
+              className="flex-1 px-6 lg:px-10 pt-10"
+            >
+              <label htmlFor="header-search-input" className="sr-only">
+                Search keywords
+              </label>
+              <div className="flex max-w-3xl items-center gap-4 border-b border-white/30 pb-4 focus-within:border-white">
+                <Search aria-hidden="true" size={28} strokeWidth={ICON_STROKE} className="shrink-0 text-white/60" />
+                <input
+                  id="header-search-input"
+                  name="q"
+                  type="search"
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  placeholder="What are you looking for?"
+                  autoComplete="off"
+                  autoFocus
+                  className="min-w-0 flex-1 bg-transparent text-2xl font-light text-white placeholder-white/40 outline-none lg:text-4xl"
+                />
+                <button
+                  type="submit"
+                  aria-label="Submit search"
+                  className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white transition-colors hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  <ArrowRight size={26} strokeWidth={ICON_STROKE} />
+                </button>
+              </div>
+              <p className="mt-4 max-w-3xl text-sm text-white/50">
+                Press Enter to search departments, programs, news, and pages.
+              </p>
+            </form>
           </motion.div>
         )}
       </AnimatePresence>
@@ -645,7 +709,7 @@ export const Header = () => {
                   </button>
                   <button
                     type="button"
-                    onClick={() => { setMobileOpen(false); setSearchOpen(true); }}
+                    onClick={() => { setMobileOpen(false); openSearch(); }}
                     className="inline-flex items-center gap-2 rounded-md border border-gray-200 px-3 py-2 text-sm text-charcoal"
                   >
                     <Search size={ICON_SIZE} strokeWidth={ICON_STROKE} />

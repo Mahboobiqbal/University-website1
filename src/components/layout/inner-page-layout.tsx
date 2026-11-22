@@ -7,18 +7,26 @@ import { usePathname } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
 interface InnerPageLayoutProps {
   children: React.ReactNode;
   className?: string;
+  breadcrumbs?: BreadcrumbItem[];
 }
 
 export const InnerPageLayout: React.FC<InnerPageLayoutProps> = ({
   children,
   className,
+  breadcrumbs,
 }) => {
   const pathname = usePathname() || "/";
   const segments = pathname.split("/").filter(Boolean);
   const parentLabels: Record<string, string> = {
+    admissions: "Admissions",
     department: "Academics",
     departments: "Academics",
     faculties: "Academics",
@@ -47,7 +55,7 @@ export const InnerPageLayout: React.FC<InnerPageLayoutProps> = ({
   const parentLabel =
     hasAcademicParent || segments.length > 1 ? parentLabels[segments[0]] : undefined;
   const parentHref =
-    segments[0] === "news" || segments[0] === "events"
+    segments[0] === "news" || segments[0] === "events" || segments[0] === "admissions"
       ? `/${segments[0]}`
       : "/faculties";
 
@@ -60,29 +68,30 @@ export const InnerPageLayout: React.FC<InnerPageLayoutProps> = ({
       >
         <nav aria-label="Breadcrumb" className="mb-5">
           <ol className="flex flex-wrap items-center gap-2 text-xs font-medium text-gray-500 sm:text-sm">
-            <li>
-              <Link href="/" className="transition-colors hover:text-brand">
-                Home
-              </Link>
-            </li>
-            {parentLabel && (
-              <>
-                <li aria-hidden="true">
-                  <ChevronRight className="h-3.5 w-3.5" />
-                </li>
+            {(breadcrumbs ?? [
+              { label: "Home", href: "/" },
+              ...(parentLabel ? [{ label: parentLabel, href: parentHref }] : []),
+              { label: pageLabel },
+            ]).map((item, index) => (
+              <React.Fragment key={`${item.label}-${index}`}>
+                {index > 0 && (
+                  <li aria-hidden="true">
+                    <ChevronRight className="h-3.5 w-3.5" />
+                  </li>
+                )}
                 <li>
-                  <Link href={parentHref} className="transition-colors hover:text-brand">
-                    {parentLabel}
-                  </Link>
+                  {item.href ? (
+                    <Link href={item.href} className="transition-colors hover:text-[#233623]">
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <span aria-current="page" className="text-[#233623]">
+                      {item.label}
+                    </span>
+                  )}
                 </li>
-              </>
-            )}
-            <li aria-hidden="true">
-              <ChevronRight className="h-3.5 w-3.5" />
-            </li>
-            <li aria-current="page" className="text-[#233623]">
-              {pageLabel}
-            </li>
+              </React.Fragment>
+            ))}
           </ol>
         </nav>
         <div className="inner-page-content overflow-hidden border border-[#e7e5df] bg-white shadow-[0_12px_40px_rgba(27,35,27,0.04)]">

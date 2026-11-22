@@ -1,327 +1,275 @@
 "use client";
 
-import * as React from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
+import { ArrowUpRight, ChevronDown, ExternalLink, Search } from "lucide-react";
 import {
-  ArrowLeft,
-  ArrowRight,
-  ArrowUpRight,
-  BookOpen,
-  ChevronDown,
-  GraduationCap,
-  Search,
-} from "lucide-react";
+  ADMISSION_CAMPUSES,
+  ADMISSION_INFO,
+  ADMISSION_NOTICES,
+  WOMEN_CAMPUS_FALL_2026_PROGRAMS,
+  slugifyAdmissionProgram,
+  type AdmissionTopic,
+} from "@/data/admissions";
 import { DEPARTMENTS } from "@/data/departments";
 
 export type AdmissionLevel = "Undergraduate" | "MS/MPhil" | "PhD";
 
-const levelMeta: Record<AdmissionLevel, { title: string; subtitle: string; entryTest: string }> = {
-  Undergraduate: {
-    title: "Undergraduate/BS Admission",
-    subtitle: "Choose a campus and BS programme",
-    entryTest: "NO ENTRY TEST REQUIRED FOR BS ADMISSIONS",
-  },
-  "MS/MPhil": {
-    title: "Graduate/Postgraduate Admission",
-    subtitle: "Choose a campus and MS/MPhil programme",
-    entryTest: "ADMISSION ENTRY TEST REQUIRED",
-  },
-  PhD: {
-    title: "PhD Admission",
-    subtitle: "Choose a campus and doctoral programme",
-    entryTest: "ADMISSION ENTRY TEST REQUIRED",
-  },
-};
+interface AdmissionRoadmapProps {
+  level: AdmissionLevel;
+  initialCampus?: string;
+}
 
-export function AdmissionRoadmap({ level }: { level: AdmissionLevel }) {
-  const [openCampus, setOpenCampus] = React.useState<"Main Campus" | "Women Campus" | null>("Main Campus");
-  const [selectedProgram, setSelectedProgram] = React.useState<{
-    name: string;
-    level: string;
-    department: string;
-    curriculum: { title: string; url: string }[];
-  } | null>(null);
-  const [query, setQuery] = React.useState("");
+const resourceTopics: AdmissionTopic[] = [
+  "how-to-apply",
+  "admission-quota",
+  "test-subjects",
+  "test-exemptions",
+  "fee-structure",
+  "sample-papers",
+  "scholarships",
+  "important-dates",
+  "international-admissions",
+  "contact",
+];
 
-  const meta = levelMeta[level];
-  const programmes = DEPARTMENTS.flatMap((department) =>
+function getPrograms(campusId: string, level: AdmissionLevel) {
+  if (campusId === "women-campus") {
+    if (level !== "Undergraduate") return [];
+    return WOMEN_CAMPUS_FALL_2026_PROGRAMS.map((item) => ({
+      name: item.name,
+      departmentId: item.departmentId,
+      departmentName:
+        DEPARTMENTS.find((department) => department.id === item.departmentId)?.name ??
+        "Women Campus",
+    }));
+  }
+
+  return DEPARTMENTS.flatMap((department) =>
     department.programs
-      .filter((program) => program.level === level)
+      .filter((program) => {
+        if (level === "Undergraduate") return program.level === "Undergraduate";
+        if (level === "PhD") return program.level.toLowerCase().includes("phd");
+        return (
+          program.level.toLowerCase().includes("ms") ||
+          program.level.toLowerCase().includes("m.phil") ||
+          program.level.toLowerCase().includes("mphil") ||
+          program.level.toLowerCase().includes("master")
+        );
+      })
       .map((program) => ({
         name: program.name,
-        level: program.level,
-        department: department.name,
-        curriculum: department.curriculum,
+        departmentId: department.id,
+        departmentName: department.name,
       }))
-  ).filter((program) =>
-    `${program.name} ${program.department}`.toLowerCase().includes(query.trim().toLowerCase())
   );
+}
+
+export function AdmissionRoadmap({ level, initialCampus }: AdmissionRoadmapProps) {
+  const [openCampus, setOpenCampus] = useState<string | null>(initialCampus ?? null);
+  const [query, setQuery] = useState("");
+  const isUndergraduate = level === "Undergraduate";
+
+  const filteredPrograms = useMemo(() => {
+    if (!openCampus) return [];
+    const normalizedQuery = query.trim().toLowerCase();
+    return getPrograms(openCampus, level).filter((program) =>
+      `${program.name} ${program.departmentName}`.toLowerCase().includes(normalizedQuery)
+    );
+  }, [level, openCampus, query]);
 
   return (
-    <main className="min-h-screen bg-[#f7f8f6]">
-      <section className="bg-[#233623] pt-[72px] text-white xl:pt-[143px]">
-        <div className="mx-auto flex max-w-[1280px] flex-col gap-6 px-5 py-7 sm:px-8 lg:flex-row lg:items-center lg:justify-between lg:px-12 lg:py-9">
-          <div>
-            <Link
-              href="/admissions"
-              className="mb-5 inline-flex items-center gap-2 text-sm text-white/75 transition-colors hover:text-white"
-            >
-              <ArrowLeft aria-hidden="true" size={16} /> Admissions
+    <main className="bg-white">
+      <header className="bg-[#233623] px-5 py-10 text-white sm:px-8 lg:px-12 lg:py-14">
+        <div className="mx-auto max-w-7xl">
+          <nav aria-label="Breadcrumb" className="mb-7 text-sm text-white/75">
+            <Link href="/admissions" className="transition-colors hover:text-white">
+              Admissions
             </Link>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/60">
-              University of Swat
-            </p>
-            <h1 className="mt-3 max-w-3xl text-3xl font-light leading-tight sm:text-4xl lg:text-5xl">
-              {meta.title}
-            </h1>
-            <p className="mt-3 text-sm text-white/75 sm:text-base">{meta.subtitle}</p>
+            <span className="mx-2" aria-hidden="true">/</span>
+            <span aria-current="page">{level}</span>
+          </nav>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/65">
+            University of Swat
+          </p>
+          <h1 className="mt-3 text-3xl font-light sm:text-4xl">{level} admissions</h1>
+          <p className="mt-4 max-w-3xl leading-relaxed text-white/80">
+            Select a campus to review programme listings and official admission resources. Campus
+            and programme availability is determined by the latest University admission notice.
+          </p>
+          <div className="mt-6 border-l-2 border-white/40 pl-4 text-sm leading-relaxed text-white/75">
+            {isUndergraduate
+              ? "Undergraduate candidates must follow the requirements in the current BS admission notice. Postgraduate test rules do not automatically apply to BS admissions."
+              : "MS/MPhil and PhD test requirements, subjects, and exemptions depend on the current programme notice. A current subject list or exemption policy was not verified."}
           </div>
-          <a
-            href="https://cms1.uswat.edu.pk/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-[52px] items-center justify-center gap-2 bg-white px-6 text-sm font-medium text-[#233623] transition-colors hover:bg-[#f0f2ee]"
-          >
-            Apply Now <ArrowUpRight aria-hidden="true" size={16} />
-          </a>
         </div>
-      </section>
+      </header>
 
-      <div className="mx-auto max-w-[1280px] px-4 py-10 sm:px-8 lg:px-12 lg:py-14">
-        <div className="grid gap-5 lg:grid-cols-[320px_1fr]">
-          <aside className="lg:sticky lg:top-24 lg:self-start">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-brand">
-              Select campus
+      <div className="mx-auto grid max-w-7xl gap-8 px-5 py-8 sm:px-8 lg:grid-cols-[minmax(0,1fr)_300px] lg:px-12 lg:py-11">
+        <section aria-labelledby="campus-heading">
+          <div className="mb-5">
+            <h2 id="campus-heading" className="text-2xl font-medium text-charcoal">
+              Choose a campus
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-gray-600">
+              The programme directory may include options not offered in the latest intake. Always
+              confirm from the linked official notice.
             </p>
-            {(["Main Campus", "Women Campus"] as const).map((campus) => {
-              const open = openCampus === campus;
+          </div>
+
+          <div className="space-y-3">
+            {ADMISSION_CAMPUSES.map((campus) => {
+              const isOpen = openCampus === campus.id;
+              const campusPrograms = getPrograms(campus.id, level);
+              const matchingPrograms = isOpen ? filteredPrograms : campusPrograms;
+
               return (
-                <div key={campus} className="mb-3 border border-gray-200 bg-white">
+                <section key={campus.id} className="border border-gray-200">
                   <button
                     type="button"
+                    aria-expanded={isOpen}
                     onClick={() => {
-                      setOpenCampus(open ? null : campus);
-                      setSelectedProgram(null);
+                      setOpenCampus(isOpen ? null : campus.id);
+                      setQuery("");
                     }}
-                    aria-expanded={open}
-                    className="flex w-full items-center justify-between px-5 py-5 text-left"
+                    className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-[#f7f8f6]"
                   >
                     <span>
-                      <span className="block text-xs font-semibold uppercase tracking-wider text-brand">
-                        University of Swat
+                      <span className="block text-lg font-medium text-charcoal">{campus.name}</span>
+                      <span className="mt-1 block text-sm text-gray-500">
+                        {campusPrograms.length
+                          ? `${campusPrograms.length} directory programme${campusPrograms.length === 1 ? "" : "s"}`
+                          : "No current programme list verified"}
                       </span>
-                      <span className="mt-1 block text-lg font-medium text-charcoal">{campus}</span>
                     </span>
                     <ChevronDown
                       aria-hidden="true"
-                      size={18}
-                      className={`text-brand transition-transform ${open ? "rotate-180" : ""}`}
+                      size={20}
+                      className={`shrink-0 text-brand transition-transform ${isOpen ? "rotate-180" : ""}`}
                     />
                   </button>
-                </div>
+
+                  {isOpen && (
+                    <div
+                      id={`campus-panel-${campus.id}`}
+                      className="border-t border-gray-200 px-5 py-5"
+                    >
+                      <p className="leading-relaxed text-gray-600">{campus.description}</p>
+                      <a
+                        href={campus.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-brand hover:underline"
+                      >
+                        Campus information <ExternalLink aria-hidden="true" size={14} />
+                      </a>
+
+                      {campusPrograms.length > 0 ? (
+                        <>
+                          <label
+                            htmlFor={`program-search-${campus.id}`}
+                            className="mt-6 block text-sm font-medium text-charcoal"
+                          >
+                            Programmes
+                          </label>
+                          <div className="relative mt-2">
+                            <Search
+                              aria-hidden="true"
+                              size={17}
+                              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                            />
+                            <input
+                              id={`program-search-${campus.id}`}
+                              type="search"
+                              value={isOpen ? query : ""}
+                              onChange={(event) => setQuery(event.target.value)}
+                              placeholder="Search programmes or departments"
+                              className="w-full border border-gray-300 py-2.5 pl-10 pr-3 text-sm outline-none transition-colors focus:border-brand"
+                            />
+                          </div>
+
+                          {matchingPrograms.length ? (
+                            <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+                              {matchingPrograms.map((program) => (
+                                <li key={`${program.departmentId}-${program.name}`}>
+                                  <Link
+                                    href={`/admissions/program/${program.departmentId}/${slugifyAdmissionProgram(program.name)}?campus=${campus.id}`}
+                                    className="flex h-full items-center justify-between gap-3 border border-gray-200 px-4 py-3 text-sm font-medium text-charcoal transition-colors hover:border-brand hover:text-brand"
+                                  >
+                                    <span>
+                                      <span className="block">{program.name}</span>
+                                      <span className="mt-1 block text-xs font-normal text-gray-500">
+                                        {program.departmentName}
+                                      </span>
+                                    </span>
+                                    <ArrowUpRight
+                                      aria-hidden="true"
+                                      size={16}
+                                      className="shrink-0"
+                                    />
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <p className="mt-4 text-sm text-gray-600" role="status">
+                              No programmes match “{query}”.
+                            </p>
+                          )}
+                        </>
+                      ) : (
+                        <p className="mt-5 border-l-2 border-brand bg-[#f7f8f6] px-4 py-3 text-sm leading-relaxed text-gray-600">
+                          No current {level} programme list for this campus was verified in the
+                          official notices reviewed. Contact Admissions before selecting a campus.
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </section>
               );
             })}
+          </div>
+        </section>
 
-            <div className="mt-5 bg-[#233623] p-5 text-white">
-              <GraduationCap aria-hidden="true" size={22} className="mb-3" />
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/65">
-                Admission notice
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-white/80">{meta.entryTest}</p>
-              <p className="mt-3 text-xs leading-relaxed text-white/60">
-                Campus availability and current dates must be confirmed in the official admission notice.
-              </p>
-            </div>
-          </aside>
+        <aside className="h-fit border border-gray-200 bg-[#f7f8f6] p-5">
+          <h2 className="text-xl font-medium text-charcoal">Admission resources</h2>
+          <p className="mt-2 text-sm leading-relaxed text-gray-600">
+            Official information, verified notices, and clear guidance where a current policy was
+            not available.
+          </p>
+          <ul className="mt-4 divide-y divide-gray-200 border-y border-gray-200">
+            {resourceTopics.map((topic) => (
+              <li key={topic}>
+                <Link
+                  href={`/admissions/information/${topic}`}
+                  className="flex items-center justify-between gap-3 py-3 text-sm font-medium text-charcoal transition-colors hover:text-brand"
+                >
+                  {ADMISSION_INFO[topic].title}
+                  <ArrowUpRight aria-hidden="true" size={15} className="shrink-0" />
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-          <section>
-            {openCampus ? (
-              <>
-                <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.15em] text-brand">
-                      {openCampus}
-                    </p>
-                    <h2 className="mt-2 text-2xl font-light text-charcoal sm:text-3xl">
-                      {level === "Undergraduate"
-                        ? "BS programmes"
-                        : level === "MS/MPhil"
-                          ? "MS/MPhil programmes"
-                          : "PhD programmes"}
-                    </h2>
-                  </div>
-                  <label className="relative block sm:w-[260px]">
-                    <Search
-                      aria-hidden="true"
-                      size={16}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-                    />
-                    <input
-                      value={query}
-                      onChange={(event) => setQuery(event.target.value)}
-                      placeholder="Search programme"
-                      className="h-11 w-full border border-gray-200 bg-white pl-9 pr-3 text-sm outline-none focus:border-brand"
-                    />
-                  </label>
-                </div>
-
-                {selectedProgram ? (
-                  <article className="border border-gray-200 bg-white">
-                    <div className="flex flex-wrap items-start justify-between gap-4 border-b border-gray-200 p-5 sm:p-7">
-                      <div>
-                        <p className="text-xs font-semibold uppercase tracking-wider text-brand">
-                          {openCampus} • {selectedProgram.level}
-                        </p>
-                        <h3 className="mt-2 text-2xl font-light text-charcoal">
-                          {selectedProgram.name}
-                        </h3>
-                        <p className="mt-2 text-sm text-gray-500">{selectedProgram.department}</p>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => setSelectedProgram(null)}
-                        className="text-sm font-medium text-brand"
-                      >
-                        Change programme
-                      </button>
-                    </div>
-
-                    <div className="grid lg:grid-cols-[1fr_300px]">
-                      <div className="p-5 sm:p-7">
-                        <div className="grid gap-4 border-b border-gray-200 pb-6 sm:grid-cols-2 xl:grid-cols-4">
-                          <div>
-                            <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
-                              Duration
-                            </p>
-                            <p className="mt-2 text-sm text-charcoal">Not listed</p>
-                          </div>
-                          <div>
-                            <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
-                              Eligibility
-                            </p>
-                            <p className="mt-2 text-sm text-charcoal">See admission notice</p>
-                          </div>
-                          <div>
-                            <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
-                              Entry test
-                            </p>
-                            <p className="mt-2 text-sm font-medium text-brand">
-                              {level === "Undergraduate" ? "Not required" : "Required"}
-                            </p>
-                          </div>
-                          <div>
-                            <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
-                              Total subjects
-                            </p>
-                            <p className="mt-2 text-sm text-charcoal">See official curriculum</p>
-                          </div>
-                        </div>
-
-                        <div className="mt-6">
-                          <h4 className="text-xl font-medium text-charcoal">Subjects / Curriculum</h4>
-                          <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                            The number of subjects is not included in the available programme data. Use the
-                            department curriculum below to review the subject list and semester plan.
-                          </p>
-                        </div>
-                        {selectedProgram.curriculum.length ? (
-                          <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-                            {selectedProgram.curriculum.map((item) => (
-                              <li key={`${item.title}-${item.url}`} className="border border-gray-200 px-4 py-3 text-sm text-gray-700">
-                                {item.url ? (
-                                  <a
-                                    href={item.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-start gap-2 transition-colors hover:text-brand"
-                                  >
-                                    <BookOpen aria-hidden="true" size={16} className="mt-0.5 shrink-0 text-brand" />
-                                    <span>{item.title}</span>
-                                  </a>
-                                ) : (
-                                  <span className="inline-flex items-start gap-2">
-                                    <BookOpen aria-hidden="true" size={16} className="mt-0.5 shrink-0 text-brand" />
-                                    <span>{item.title} (document link unavailable)</span>
-                                  </span>
-                                )}
-                              </li>
-                            ))}
-                          </ul>
-                        ) : (
-                          <p className="mt-4 border border-gray-200 bg-[#f7f8f6] p-4 text-sm leading-relaxed text-gray-600">
-                            An official curriculum document is not available in the current department records.
-                          </p>
-                        )}
-                      </div>
-
-                      <aside className="border-t border-gray-200 bg-[#f7f8f6] p-5 sm:p-7 lg:border-l lg:border-t-0">
-                        <h4 className="text-lg font-medium text-charcoal">Fee structure</h4>
-                        <div className="mt-4 border border-gray-200 bg-white p-4">
-                          <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
-                            Current programme fee
-                          </p>
-                          <p className="mt-2 text-base font-medium text-charcoal">
-                            Not published in the available records
-                          </p>
-                        </div>
-                        <p className="mt-4 text-sm leading-relaxed text-gray-600">
-                          Fees can change by admission session. Confirm the current amount and payment breakdown
-                          with the University before applying; no fee figure is shown here unless it is officially verified.
-                        </p>
-                        <Link
-                          href="/contact"
-                          className="mt-4 inline-flex text-sm font-medium text-brand underline underline-offset-4"
-                        >
-                          Contact the University for fee details
-                        </Link>
-                        <a
-                          href="https://cms1.uswat.edu.pk/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-6 inline-flex w-full items-center justify-center gap-2 bg-brand px-5 py-3 text-sm font-medium text-white hover:bg-brand-hover"
-                        >
-                          Apply Now <ArrowUpRight aria-hidden="true" size={16} />
-                        </a>
-                      </aside>
-                    </div>
-                  </article>
-                ) : (
-                  <div className="grid gap-3 md:grid-cols-2">
-                    {programmes.length ? (
-                      programmes.map((program) => (
-                        <button
-                          key={`${program.department}-${program.name}`}
-                          type="button"
-                          onClick={() => setSelectedProgram(program)}
-                          className="group min-h-44 border border-gray-200 bg-white p-5 text-left transition-all hover:border-brand hover:shadow-[0_10px_24px_rgba(35,54,35,0.08)]"
-                        >
-                          <p className="text-xs font-semibold uppercase tracking-wider text-brand">
-                            {level === "Undergraduate" ? "BS programme" : level}
-                          </p>
-                          <h3 className="mt-3 text-lg font-medium leading-snug text-charcoal group-hover:text-brand">
-                            {program.name}
-                          </h3>
-                          <p className="mt-3 text-sm text-gray-500">{program.department}</p>
-                          <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-brand">
-                            View programme <ArrowRight aria-hidden="true" size={15} />
-                          </span>
-                        </button>
-                      ))
-                    ) : (
-                      <p className="border border-gray-200 bg-white p-6 text-sm text-gray-600 md:col-span-2">
-                        No matching programmes found.
-                      </p>
-                    )}
-                  </div>
-                )}
-              </>
-            ) : (
-              <div className="flex min-h-72 items-center justify-center border border-gray-200 bg-white p-8 text-center text-sm text-gray-500">
-                Select Main Campus or Women Campus to view programmes.
-              </div>
-            )}
-          </section>
-        </div>
+          <h3 className="mt-7 text-base font-medium text-charcoal">Published notices</h3>
+          <ul className="mt-2 space-y-3">
+            {ADMISSION_NOTICES.map((notice) => (
+              <li key={notice.href}>
+                <a
+                  href={notice.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-sm font-medium leading-relaxed text-brand hover:underline"
+                >
+                  {notice.title}
+                  <span className="mt-0.5 block text-xs font-normal text-gray-500">
+                    {notice.status}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </aside>
       </div>
     </main>
   );
