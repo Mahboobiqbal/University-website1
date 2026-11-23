@@ -48,14 +48,22 @@ export const InnerPageLayout: React.FC<InnerPageLayoutProps> = ({
   const pageLabel =
     segments[0] === "department" && segments[1]
       ? `Department of ${formatLabel(segments[1])}`
+      : segments[0] === "programs" && segments[1]
+      ? formatLabel(segments[1])
       : routeLabels[lastSegment] || formatLabel(lastSegment);
   const hasAcademicParent = ["department", "departments", "faculties", "programs"].includes(
     segments[0]
   );
   const parentLabel =
-    hasAcademicParent || segments.length > 1 ? parentLabels[segments[0]] : undefined;
+    segments[0] === "programs" && segments.length > 1
+      ? "Programs"
+      : hasAcademicParent || segments.length > 1
+      ? parentLabels[segments[0]]
+      : undefined;
   const parentHref =
-    segments[0] === "news" || segments[0] === "events" || segments[0] === "admissions"
+    segments[0] === "programs" && segments.length > 1
+      ? "/programs"
+      : segments[0] === "news" || segments[0] === "events" || segments[0] === "admissions"
       ? `/${segments[0]}`
       : "/faculties";
 
