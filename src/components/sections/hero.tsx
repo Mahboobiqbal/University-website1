@@ -144,12 +144,12 @@ export const Hero = () => {
             <Button href="/about" variant="primary" size="lg">
               {language === "ur" ? "مزید پڑھیں" : "Learn More"}
             </Button>
-            <a
+            <Link
               href="/programs"
               className="inline-flex items-center justify-center px-8 py-3 rounded-md text-lg font-medium border border-white text-white hover:bg-white hover:text-charcoal transition-colors"
             >
               {language === "ur" ? "تعلیمی پروگرام" : "Explore Programs"}
-            </a>
+            </Link>
           </motion.div>
         </div>
       </div>

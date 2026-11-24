@@ -80,20 +80,30 @@ const NAV_ORDER = [
   { href: "/administration", label: "Administration" },
 ] as const;
 
-function isNavActive(item: NavItem, pathname: string): boolean {
+function isNavActive(item: NavItem, pathname?: string | null): boolean {
+  if (!pathname) return false;
   const href = item.href;
   if (pathname === href) return true;
   if (href === "/about" && (pathname.startsWith("/vice-chancellor") || pathname === "/about")) return true;
-  if (href === "/academics" && (pathname.startsWith("/department") || pathname.startsWith("/faculties") || pathname.startsWith("/programs"))) return true;
+  if (href === "/academics" && (pathname.startsWith("/department") || pathname.startsWith("/faculties") || pathname.startsWith("/programs") || pathname.startsWith("/program"))) return true;
   if (href === "/research" && pathname.startsWith("/research")) return true;
   if (href === "/administration" && pathname.startsWith("/administration")) return true;
   if (href === "/student-life" && pathname.startsWith("/campuses")) return true;
   return false;
 }
 
+function useSafeRouter() {
+  try {
+    return useRouter();
+  } catch {
+    return null;
+  }
+}
+
 export const Header = () => {
-  const pathname = usePathname();
-  const router = useRouter();
+  const rawPathname = usePathname();
+  const pathname = rawPathname ?? "";
+  const router = useSafeRouter();
   const { language, setLanguage } = useLanguage();
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
@@ -133,7 +143,12 @@ export const Header = () => {
     event.preventDefault();
     const query = searchQuery.trim();
     setSearchOpen(false);
-    router.push(query ? `/search?q=${encodeURIComponent(query)}` : "/search");
+    const target = query ? `/search?q=${encodeURIComponent(query)}` : "/search";
+    if (router) {
+      router.push(target);
+    } else if (typeof window !== "undefined") {
+      window.location.assign(target);
+    }
     restoreSearchFocus();
   };
 
@@ -541,6 +556,8 @@ export const Header = () => {
             </div>
             <form
               onSubmit={handleSearchSubmit}
+              action="/search"
+              method="GET"
               role="search"
               className="flex-1 px-6 lg:px-10 pt-10"
             >
@@ -738,11 +755,11 @@ export const Header = () => {
 const MegaPanel = ({
   content,
   top,
-  pathname,
+  pathname = "",
 }: {
   content?: MegaContent;
   top: number;
-  pathname: string;
+  pathname?: string | null;
 }) => {
   if (!content) return null;
   return (

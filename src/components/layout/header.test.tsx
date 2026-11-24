@@ -4,10 +4,13 @@ import { describe, expect, it, vi } from "vitest";
 import { Header } from "./header";
 import { LanguageProvider } from "@/components/providers/language-provider";
 
-const { push } = vi.hoisted(() => ({ push: vi.fn() }));
+const { push, getPathname } = vi.hoisted(() => ({
+  push: vi.fn(),
+  getPathname: vi.fn(() => "/"),
+}));
 
 vi.mock("next/navigation", () => ({
-  usePathname: () => "/",
+  usePathname: () => getPathname(),
   useRouter: () => ({ push }),
 }));
 
@@ -40,5 +43,10 @@ describe("Header", () => {
     await user.type(screen.getByRole("searchbox", { name: "Search keywords" }), "physics{Enter}");
 
     expect(push).toHaveBeenCalledWith("/search?q=physics");
+  });
+
+  it("renders safely without throwing when pathname is null", () => {
+    getPathname.mockReturnValueOnce(null as unknown as string);
+    expect(() => renderHeader()).not.toThrow();
   });
 });

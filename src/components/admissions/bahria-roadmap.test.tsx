@@ -35,9 +35,9 @@ describe("University of Swat admissions roadmap", () => {
     render(<AdmissionRoadmapBahria level="masters" />);
 
     const input = screen.getByLabelText(/Search programmes, subjects or campuses/i);
-    await user.type(input, "cyber security");
+    await user.type(input, "computer science");
     expect(screen.getByText(/results? for/i)).toBeInTheDocument();
-    expect(screen.getAllByRole("link", { name: /Cyber Security/i }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole("link", { name: /Computer Science/i }).length).toBeGreaterThan(0);
 
     await user.clear(input);
     await user.type(input, "not-a-real-programme");

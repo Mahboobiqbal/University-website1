@@ -15,7 +15,7 @@ import {
   BadgeCheck,
   Mail,
 } from "lucide-react";
-import { DEPARTMENTS } from "@/data/departments";
+import { DEPARTMENTS, slugifyProgramName } from "@/data/departments";
 import {
   ADMISSION_NOTICES,
   slugifyAdmissionProgram,
@@ -404,20 +404,35 @@ export function AdmissionsSection({ compact = false }: { compact?: boolean }) {
               ? filteredPrograms
               : programs
             ).slice(0, 9).map((program) => (
-              <article key={`${program.department}-${program.name}`} className="border border-gray-200 p-5">
-                <span className="text-xs font-semibold uppercase tracking-wider text-brand">
-                  {program.level}
-                </span>
-                <h4 className="mt-3 min-h-12 text-lg font-medium leading-snug text-charcoal">
-                  {program.name}
-                </h4>
-                <p className="mt-2 text-sm text-gray-500">{program.department}</p>
-                <Link
-                  href={program.href}
-                  className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-brand"
-                >
-                  View admission details <ArrowUpRight aria-hidden="true" size={15} />
-                </Link>
+              <article key={`${program.department}-${program.name}`} className="border border-gray-200 p-5 flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-brand">
+                    {program.level}
+                  </span>
+                  <h4 className="mt-3 min-h-12 text-lg font-medium leading-snug text-charcoal">
+                    <Link
+                      href={`/programs/${slugifyProgramName(program.name)}`}
+                      className="hover:text-brand transition-colors"
+                    >
+                      {program.name}
+                    </Link>
+                  </h4>
+                  <p className="mt-2 text-sm text-gray-500">{program.department}</p>
+                </div>
+                <div className="mt-5 flex items-center justify-between gap-2 border-t border-gray-100 pt-3">
+                  <Link
+                    href={`/programs/${slugifyProgramName(program.name)}`}
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-brand hover:underline"
+                  >
+                    About Program &rarr;
+                  </Link>
+                  <Link
+                    href={program.href}
+                    className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-brand"
+                  >
+                    Admissions <ArrowUpRight aria-hidden="true" size={13} />
+                  </Link>
+                </div>
               </article>
             ))}
           </div>

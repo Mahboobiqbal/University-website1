@@ -3,8 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight, Mail, MapPin, FileText, ArrowLeft } from "lucide-react";
 import { InnerPageLayout } from "@/components/layout/inner-page-layout";
-import { DEPARTMENTS, getDepartmentById } from "@/data/departments";
-import { slugifyFacultyName } from "@/data/departments";
+import { DEPARTMENTS, getDepartmentById, slugifyFacultyName, slugifyProgramName } from "@/data/departments";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -81,13 +80,23 @@ export default async function DepartmentPage({ params }: Props) {
               <h2 className="text-xl font-semibold text-charcoal mb-4 top-line">Degree Programs</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {dept.programs.map((p) => (
-                  <div
+                  <Link
                     key={p.name}
-                    className="flex items-center justify-between gap-3 p-4 rounded-lg border border-gray-200 hover:border-brand transition-colors"
+                    href={`/programs/${slugifyProgramName(p.name)}`}
+                    className="group flex items-center justify-between gap-3 p-4 rounded-lg border border-gray-200 hover:border-brand hover:bg-[#fafaf8] transition-all"
                   >
-                    <span className="text-sm font-medium text-charcoal">{p.name}</span>
-                    <span className="text-xs text-brand font-medium shrink-0">{p.level}</span>
-                  </div>
+                    <div>
+                      <span className="text-sm font-medium text-charcoal group-hover:text-brand transition-colors">
+                        {p.name}
+                      </span>
+                      <span className="block text-xs text-brand font-normal mt-0.5 opacity-80 group-hover:opacity-100">
+                        About Program &rarr;
+                      </span>
+                    </div>
+                    <span className="text-xs text-brand font-medium shrink-0 bg-brand/5 px-2.5 py-1 rounded">
+                      {p.level}
+                    </span>
+                  </Link>
                 ))}
               </div>
             </section>
