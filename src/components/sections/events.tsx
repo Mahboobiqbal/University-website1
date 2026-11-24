@@ -18,7 +18,7 @@ export const EventsSection = () => {
   };
 
   return (
-    <section id="main-holder" className="py-16 lg:py-24 bg-white">
+    <section id="events" className="py-16 lg:py-24 bg-white">
       <div className="max-w-[1280px] mx-auto px-4 lg:px-6">
         <div className="flex flex-wrap justify-between items-center gap-4 mb-10 lg:mb-14">
           <motion.h2

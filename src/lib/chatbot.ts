@@ -1,5 +1,3 @@
-import { GoogleGenAI } from "@google/genai";
-
 export interface ChatMessage {
   role: "user" | "assistant" | "system";
   content: string;
@@ -73,7 +71,7 @@ Here are a few popular topics I can assist you with:
 - **[49+ Degree Programs & Eligibility](/programs)**
 - **[22 Teaching Departments](/departments)**
 - **[Main Campus (Charbagh) & Sub-campuses](/campuses)**
-- **[Fee Structure & HEC Scholarships](/admissions/guide/fee-structure)**
+- **[Fee Structure & HEC Scholarships](/admissions/guide/fee-undergraduate)**
 
 How can I help you today?`,
       suggestions: [
@@ -116,7 +114,7 @@ Admissions at the University of Swat open biannually for **Fall** (major intake)
 🔗 **Useful Links:**
 - [Explore the Admissions Roadmap](/admissions)
 - [How to Apply Step-by-Step](/admissions/guide/how-to-apply)
-- [Fee Structure & Payment Guide](/admissions/guide/fee-structure)
+- [Fee Structure & Payment Guide](/admissions/guide/fee-undergraduate)
 - [Admission Quotas & Reserved Seats](/admissions/guide/admission-quota)`,
       suggestions: [
         "What are the admission eligibility requirements?",
@@ -187,7 +185,7 @@ The Department of Computer and Software Technology is one of the most vibrant de
 - **Eligibility for BS**: At least 50% marks in FSc Pre-Engineering, ICS, or General Science with Mathematics.
 - **Facilities**: State-of-the-art computer labs, high-speed internet, and dedicated research groups.
 
-🔗 [View Computer & Software Technology Department](/department/computer-and-software-technology) | [All Programs](/programs)`,
+🔗 [View Computer & Software Technology Department](/department/computer-software-technology) | [All Programs](/programs)`,
       suggestions: [
         "How do I apply for BS Computer Science?",
         "What is the fee structure?",
@@ -223,7 +221,7 @@ The University of Swat provides an affordable public-sector fee schedule with ex
 - **University Merit Scholarships**: Awarded to top-ranking students across departments each semester.
 
 🔗 **Helpful Links:**
-- [Official Fee Structure Overview](/admissions/guide/fee-structure)
+- [Official Fee Structure Overview](/admissions/guide/fee-undergraduate)
 - [Scholarships & Financial Aid Guide](/admissions/information/scholarships)
 - [Contact Finance Branch](/contact)`,
       suggestions: [
@@ -420,13 +418,11 @@ export async function generateChatResponse(messages: ChatMessage[]): Promise<Cha
   const lastUserMessage = [...messages].reverse().find((m) => m.role === "user");
   const userQuery = lastUserMessage?.content || "";
 
-  const apiKey =
-    process.env.GEMINI_API_KEY ||
-    process.env.GOOGLE_GENAI_API_KEY ||
-    process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_GENAI_API_KEY;
 
   if (apiKey) {
     try {
+      const { GoogleGenAI } = await import("@google/genai");
       const ai = new GoogleGenAI({ apiKey });
 
       // Build conversation history for generateContent

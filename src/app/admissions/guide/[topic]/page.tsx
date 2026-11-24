@@ -16,6 +16,8 @@ const levels: Record<string, AdmissionLevel> = {
   phd: "phd",
 };
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return Object.keys(ADMISSION_GUIDES).map((topic) => ({ topic }));
 }
@@ -23,9 +25,10 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props) {
   const { topic } = await params;
   const guide = ADMISSION_GUIDES[topic];
+  if (!guide) notFound();
   return {
-    title: guide ? `${guide.title} | University of Swat` : "Admission Guide | University of Swat",
-    description: guide?.intro,
+    title: `${guide.title} | University of Swat`,
+    description: guide.intro,
   };
 }
 

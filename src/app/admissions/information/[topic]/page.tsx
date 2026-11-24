@@ -10,6 +10,8 @@ interface Props {
 
 const topics = Object.keys(ADMISSION_INFO) as AdmissionTopic[];
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return topics.map((topic) => ({ topic }));
 }

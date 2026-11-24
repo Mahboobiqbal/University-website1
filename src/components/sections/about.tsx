@@ -11,7 +11,7 @@ export const AboutSection = () => {
   const { language } = useLanguage();
   const ur = language === "ur";
   return (
-    <section className="bg-white py-20 lg:py-28">
+    <section id="about" className="scroll-mt-36 bg-white py-20 lg:py-28">
       <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-10 px-4 lg:grid-cols-12 lg:gap-16 lg:px-6">
         <div className="lg:col-span-8">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-brand">

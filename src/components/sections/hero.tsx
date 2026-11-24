@@ -201,7 +201,7 @@ export const Hero = () => {
         })}
         <div className="w-px h-10 bg-white/30 my-3" />
         <Link
-          href="#main-holder"
+          href="#about"
           className="flex flex-col items-center gap-1 text-[10px] tracking-widest text-white/70 hover:text-white transition-colors"
         >
           {HERO.scroll} <ChevronDown className="w-3 h-3" />

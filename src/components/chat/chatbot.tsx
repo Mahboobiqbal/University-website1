@@ -27,7 +27,7 @@ I can assist you with official university information:
 - **[49+ Academic Degree Programs](/programs)**
 - **[22 Teaching Departments & Faculties](/departments)**
 - **[Campuses & Facilities](/campuses)**
-- **[Fee Structure & Scholarships](/admissions/guide/fee-structure)**
+- **[Fee Structure & Scholarships](/admissions/guide/fee-undergraduate)**
 
 Select a query topic below or enter your question directly.`,
   },
