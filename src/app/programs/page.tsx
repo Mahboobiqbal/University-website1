@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { InnerPageLayout } from "@/components/layout/inner-page-layout";
-import { DEPARTMENTS } from "@/data/departments";
+import { getAllPrograms } from "@/data/departments";
 
 export const metadata = {
   title: "Academic Programs | University of Swat",
@@ -22,13 +22,9 @@ const LEVEL_LABELS: Record<string, string> = {
 export default async function ProgramsPage({ searchParams }: ProgramsPageProps) {
   const { level } = await searchParams;
   const selectedLevel = level ? LEVEL_LABELS[level.toLowerCase()] : undefined;
-  const programs = DEPARTMENTS.flatMap((department) =>
-    department.programs.map((program) => ({
-      ...program,
-      department: department.name,
-      href: department.href,
-    }))
-  ).filter((program) => !selectedLevel || program.level === selectedLevel);
+  const programs = getAllPrograms().filter(
+    (program) => !selectedLevel || program.level === selectedLevel
+  );
 
   const filters = [
     { label: "All programs", href: "/programs", value: undefined },
@@ -61,7 +57,7 @@ export default async function ProgramsPage({ searchParams }: ProgramsPageProps) 
                 key={filter.label}
                 href={filter.href}
                 aria-current={active ? "page" : undefined}
-                className={`rounded-full border px-5 py-2.5 text-sm font-medium transition-colors ${
+                className={`rounded-none border px-5 py-2 text-sm font-medium transition-colors ${
                   active
                     ? "border-[#74201e] bg-[#74201e] text-white"
                     : "border-gray-200 text-gray-600 hover:border-[#74201e] hover:text-[#74201e]"
@@ -77,7 +73,7 @@ export default async function ProgramsPage({ searchParams }: ProgramsPageProps) 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {programs.map((program) => (
               <Link
-                key={`${program.department}-${program.name}`}
+                key={`${program.departmentId}-${program.slug}`}
                 href={program.href}
                 className="group flex min-h-40 flex-col justify-between border border-gray-200 bg-white p-5 transition-all duration-300 hover:border-[#74201e] hover:shadow-[0_12px_30px_rgba(35,54,35,0.08)]"
               >
@@ -88,10 +84,10 @@ export default async function ProgramsPage({ searchParams }: ProgramsPageProps) 
                   <h2 className="mt-3 text-lg font-medium leading-snug text-charcoal transition-colors group-hover:text-brand">
                     {program.name}
                   </h2>
-                  <p className="mt-2 text-sm text-gray-500">{program.department}</p>
+                  <p className="mt-2 text-sm text-gray-500">{program.departmentName}</p>
                 </div>
                 <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-brand">
-                  Department details
+                  About Program
                   <ArrowUpRight
                     aria-hidden="true"
                     size={16}

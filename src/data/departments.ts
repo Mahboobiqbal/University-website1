@@ -76,6 +76,51 @@ export function slugifyFacultyName(name: string): string {
     .replace(/^-|-$/g, "");
 }
 
+export function slugifyProgramName(name: string): string {
+  return name
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+export interface ProgramItem {
+  name: string;
+  slug: string;
+  level: string;
+  departmentId: string;
+  departmentName: string;
+  departmentHref: string;
+  departmentImage: string;
+  faculty: string;
+  curriculum: { title: string; url: string }[];
+  href: string;
+}
+
+export function getAllPrograms(): ProgramItem[] {
+  return DEPARTMENTS.flatMap((department) =>
+    department.programs.map((program) => {
+      const slug = slugifyProgramName(program.name);
+      return {
+        name: program.name,
+        slug,
+        level: program.level,
+        departmentId: department.id,
+        departmentName: department.name,
+        departmentHref: department.href,
+        departmentImage: department.image,
+        faculty: department.faculty,
+        curriculum: department.curriculum,
+        href: `/programs/${slug}`,
+      };
+    })
+  );
+}
+
+export function getProgramBySlug(slug: string): ProgramItem | undefined {
+  return getAllPrograms().find((p) => p.slug === slug);
+}
+
 export function getFacultyMember(departmentId: string, memberSlug: string) {
   const department = getDepartmentById(departmentId);
   if (!department) return undefined;

@@ -134,11 +134,11 @@ export const Footer = () => {
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         aria-label="Top of Site"
         className={cn(
-          "fixed bottom-6 right-6 z-40 flex items-center gap-2 bg-[#233623] text-white px-4 py-3 rounded-full shadow-lg border border-white/20 text-xs font-medium transition-all duration-300 hover:bg-brand",
+          "fixed bottom-6 left-6 z-40 flex items-center gap-2 bg-[#17231d] text-white px-3.5 py-2.5 rounded-none shadow-lg border border-white/20 text-xs font-medium transition-all duration-300 hover:bg-[#74201e]",
           showTop ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
         )}
       >
-        <ArrowUp className="w-4 h-4" />
+        <ArrowUp className="w-3.5 h-3.5" />
         Top of Site
       </button>
     </>

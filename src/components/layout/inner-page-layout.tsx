@@ -15,12 +15,14 @@ export interface BreadcrumbItem {
 interface InnerPageLayoutProps {
   children: React.ReactNode;
   className?: string;
+  contentClassName?: string;
   breadcrumbs?: BreadcrumbItem[];
 }
 
 export const InnerPageLayout: React.FC<InnerPageLayoutProps> = ({
   children,
   className,
+  contentClassName,
   breadcrumbs,
 }) => {
   const pathname = usePathname() || "/";
@@ -48,14 +50,22 @@ export const InnerPageLayout: React.FC<InnerPageLayoutProps> = ({
   const pageLabel =
     segments[0] === "department" && segments[1]
       ? `Department of ${formatLabel(segments[1])}`
+      : segments[0] === "programs" && segments[1]
+      ? formatLabel(segments[1])
       : routeLabels[lastSegment] || formatLabel(lastSegment);
   const hasAcademicParent = ["department", "departments", "faculties", "programs"].includes(
     segments[0]
   );
   const parentLabel =
-    hasAcademicParent || segments.length > 1 ? parentLabels[segments[0]] : undefined;
+    segments[0] === "programs" && segments.length > 1
+      ? "Programs"
+      : hasAcademicParent || segments.length > 1
+      ? parentLabels[segments[0]]
+      : undefined;
   const parentHref =
-    segments[0] === "news" || segments[0] === "events" || segments[0] === "admissions"
+    segments[0] === "programs" && segments.length > 1
+      ? "/programs"
+      : segments[0] === "news" || segments[0] === "events" || segments[0] === "admissions"
       ? `/${segments[0]}`
       : "/faculties";
 
@@ -94,7 +104,12 @@ export const InnerPageLayout: React.FC<InnerPageLayoutProps> = ({
             ))}
           </ol>
         </nav>
-        <div className="inner-page-content overflow-hidden border border-[#e7e5df] bg-white shadow-[0_12px_40px_rgba(27,35,27,0.04)]">
+        <div
+          className={cn(
+            "inner-page-content overflow-hidden border border-[#e7e5df] bg-white shadow-[0_12px_40px_rgba(27,35,27,0.04)]",
+            contentClassName
+          )}
+        >
           {children}
         </div>
       </motion.div>

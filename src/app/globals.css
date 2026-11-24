@@ -25,16 +25,20 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
   body {
     background: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
     font-feature-settings: "rlig" 1, "calt" 1;
     text-rendering: optimizeLegibility;
-  }
-
-  html {
-    scroll-behavior: smooth;
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -131,4 +135,93 @@
     outline: 2px solid var(--brand);
     outline-offset: 3px;
   }
+}
+
+/* Student Character Animations */
+@keyframes student-bob {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes student-shadow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(0.8);
+    opacity: 0.1;
+  }
+}
+
+@keyframes student-blink {
+  0%, 90%, 100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.08);
+  }
+}
+
+@keyframes tassel-sway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(8deg);
+  }
+}
+
+@keyframes student-wave {
+  0%, 70%, 100% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-14deg);
+  }
+  80% {
+    transform: rotate(12deg);
+  }
+  85% {
+    transform: rotate(-10deg);
+  }
+  90% {
+    transform: rotate(8deg);
+  }
+  95% {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-student-bob {
+  animation: student-bob 3s ease-in-out infinite;
+}
+
+.animate-student-shadow {
+  animation: student-shadow 3s ease-in-out infinite;
+}
+
+.animate-student-blink {
+  animation: student-blink 4s ease-in-out infinite;
+}
+
+.animate-tassel-sway {
+  animation: tassel-sway 2.4s ease-in-out infinite;
+}
+
+.animate-student-wave {
+  animation: student-wave 4s ease-in-out infinite;
+}
+
+/* Chatbot custom clean scrollbar hiding */
+.chatbot-no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.chatbot-no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

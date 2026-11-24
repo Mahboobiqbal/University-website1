@@ -3,8 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight, Mail, MapPin, FileText, ArrowLeft } from "lucide-react";
 import { InnerPageLayout } from "@/components/layout/inner-page-layout";
-import { DEPARTMENTS, getDepartmentById } from "@/data/departments";
-import { slugifyFacultyName } from "@/data/departments";
+import { DEPARTMENTS, getDepartmentById, slugifyFacultyName, slugifyProgramName } from "@/data/departments";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -30,16 +29,17 @@ export default async function DepartmentPage({ params }: Props) {
 
   return (
     <InnerPageLayout>
-      <Link
-        href="/departments"
-        className="inline-flex items-center gap-2 text-sm text-brand hover:text-charcoal transition-colors mb-6"
-      >
-        <ArrowLeft className="w-4 h-4" /> All Departments
-      </Link>
+      <section className="bg-white px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-12">
+        <Link
+          href="/departments"
+          className="inline-flex items-center gap-2 text-sm text-brand hover:text-charcoal transition-colors mb-6"
+        >
+          <ArrowLeft className="w-4 h-4" /> All Departments
+        </Link>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         <div className="lg:col-span-2">
-          <div className="relative w-full h-64 md:h-80 rounded-xl overflow-hidden mb-8">
+          <div className="relative w-full h-64 md:h-80 rounded-none border border-[#e7e5df] overflow-hidden mb-8">
             <Image
               src={dept.image}
               alt={dept.name}
@@ -81,13 +81,23 @@ export default async function DepartmentPage({ params }: Props) {
               <h2 className="text-xl font-semibold text-charcoal mb-4 top-line">Degree Programs</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {dept.programs.map((p) => (
-                  <div
+                  <Link
                     key={p.name}
-                    className="flex items-center justify-between gap-3 p-4 rounded-lg border border-gray-200 hover:border-brand transition-colors"
+                    href={`/programs/${slugifyProgramName(p.name)}`}
+                    className="group flex items-center justify-between gap-3 p-4 rounded-none border border-[#e7e5df] hover:border-brand hover:bg-[#fafaf8] transition-all"
                   >
-                    <span className="text-sm font-medium text-charcoal">{p.name}</span>
-                    <span className="text-xs text-brand font-medium shrink-0">{p.level}</span>
-                  </div>
+                    <div>
+                      <span className="text-sm font-medium text-charcoal group-hover:text-brand transition-colors">
+                        {p.name}
+                      </span>
+                      <span className="block text-xs text-brand font-normal mt-0.5 opacity-80 group-hover:opacity-100">
+                        About Program &rarr;
+                      </span>
+                    </div>
+                    <span className="text-xs text-brand font-medium shrink-0 bg-brand/5 px-2.5 py-1 rounded-none border border-brand/20">
+                      {p.level}
+                    </span>
+                  </Link>
                 ))}
               </div>
             </section>
@@ -103,7 +113,7 @@ export default async function DepartmentPage({ params }: Props) {
                     href={c.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-3 rounded-lg border border-gray-200 hover:border-brand hover:bg-gray-50 transition-colors group"
+                    className="flex items-center gap-3 p-3 rounded-none border border-[#e7e5df] hover:border-brand hover:bg-[#fafaf8] transition-colors group"
                   >
                     <FileText className="w-4 h-4 text-brand shrink-0" />
                     <span className="text-sm text-charcoal flex-1">{c.title}</span>
@@ -121,20 +131,21 @@ export default async function DepartmentPage({ params }: Props) {
                 {dept.facultyMembers.map((member) => (
                   <div
                     key={member.name}
-                    className="group flex items-center gap-4 p-4 rounded-lg border border-gray-200 transition-all hover:border-brand hover:shadow-sm"
+                    className="group flex items-center gap-4 p-4 rounded-none border border-[#e7e5df] transition-all hover:border-brand hover:shadow-xs bg-white"
                   >
                     {member.image ? (
-                      <div className="relative w-16 h-16 shrink-0 rounded-full overflow-hidden bg-gray-100">
+                      <div className="relative w-16 h-16 shrink-0 rounded-none border border-gray-200 overflow-hidden bg-gray-100">
                         <Image
                           src={member.image}
                           alt={member.name}
                           fill
+                          unoptimized={Boolean(member.image?.includes("uswat.edu.pk"))}
                           className="object-cover"
                           sizes="64px"
                         />
                       </div>
                     ) : (
-                      <div className="w-16 h-16 shrink-0 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 font-light text-xl">
+                      <div className="w-16 h-16 shrink-0 rounded-none border border-gray-200 bg-gray-100 flex items-center justify-center text-gray-400 font-light text-xl">
                         {member.name.charAt(0)}
                       </div>
                     )}
@@ -168,7 +179,7 @@ export default async function DepartmentPage({ params }: Props) {
         </div>
 
         <aside className="lg:col-span-1">
-          <div className="rounded-xl border border-gray-200 bg-gray-50 p-6 lg:sticky lg:top-28">
+          <div className="rounded-none border border-[#e7e5df] border-t-2 border-t-[#74201e] bg-[#fafaf8] p-6 lg:sticky lg:top-28 shadow-xs">
             <h2 className="text-lg font-semibold text-charcoal mb-5">Contact Information</h2>
             {dept.contact.office && (
               <div className="flex gap-3 mb-4">
@@ -190,6 +201,7 @@ export default async function DepartmentPage({ params }: Props) {
           </div>
         </aside>
       </div>
+      </section>
     </InnerPageLayout>
   );
 }

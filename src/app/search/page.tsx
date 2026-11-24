@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight, Search } from "lucide-react";
 import { InnerPageLayout } from "@/components/layout/inner-page-layout";
-import { DEPARTMENTS } from "@/data/departments";
+import { DEPARTMENTS, getAllPrograms } from "@/data/departments";
 import { FACULTIES } from "@/data/faculties";
 import { NEWS } from "@/data/home";
 
@@ -88,6 +88,18 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const query = q.trim();
   const normalizedQuery = query.toLocaleLowerCase();
 
+  const programResults = getAllPrograms()
+    .filter((program) => {
+      const searchable = `${program.name} ${program.level} ${program.departmentName}`.toLocaleLowerCase();
+      return normalizedQuery && searchable.includes(normalizedQuery);
+    })
+    .map((program) => ({
+      title: program.name,
+      href: program.href,
+      description: `${program.level} degree offered by ${program.departmentName}`,
+      category: "Program",
+    }));
+
   const departmentResults = DEPARTMENTS.filter((department) => {
     const searchable = [
       department.name,
@@ -129,7 +141,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     )
     .map((item) => item);
 
-  const results = [...departmentResults, ...facultyResults, ...newsResults, ...pageResults];
+  const results = [...programResults, ...departmentResults, ...facultyResults, ...newsResults, ...pageResults];
   const uniqueResults = results.filter(
     (result, index) => results.findIndex((entry) => entry.href === result.href) === index
   );
