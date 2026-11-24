@@ -16,8 +16,7 @@ const campuses = [
     category: "Main campus",
     description:
       "The main academic campus and administrative offices of the University of Swat are located in Charbagh, Swat.",
-    image:
-      "https://uswat.edu.pk/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2021-11-05-at-10.51.45-AM-pflqkzvktg8ddutd0sn4prwl1tj4kzufodulzc1nea.jpeg",
+    image: "/class-picture.jpg",
     href: "https://uswat.edu.pk/maincampus/",
   },
   {
@@ -27,7 +26,7 @@ const campuses = [
     description:
       "The Women Campus brings academic opportunities closer to women students in Swat. Check the university's official updates for current programs and facilities.",
     image:
-      "https://uswat.edu.pk/wp-content/uploads/elementor/thumbs/WC-01-qifli6radkjm2a5bb91tvyv4g9k11d9zck5nxzbeeq.jpg",
+      "https://images.pexels.com/photos/1438072/pexels-photo-1438072.jpeg?auto=compress&cs=tinysrgb&w=800",
     href: "https://uswat.edu.pk/women-campus/",
   },
   {
@@ -36,7 +35,7 @@ const campuses = [
     category: "Campus information",
     description:
       "The University of Swat publishes information about its Shangla Campus. Refer to the official campus page for current announcements and details.",
-    image: "https://uswat.edu.pk/wp-content/uploads/2026/11/7.jpg",
+    image: "https://images.pexels.com/photos/97799/pexels-photo-97799.jpeg?auto=compress&cs=tinysrgb&w=800",
     href: "https://uswat.edu.pk/shangla-campus/",
   },
 ];

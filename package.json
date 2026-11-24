@@ -15,6 +15,7 @@
     "test:a11y": "playwright test --grep accessibility"
   },
   "dependencies": {
+    "@google/genai": "^3.6.1",
     "clsx": "^2.1.1",
     "framer-motion": "^14.14.0",
     "lucide-react": "^1.77.0",

@@ -109,14 +109,14 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
 
           <div className="max-w-4xl">
             <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#233623] px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#b9d2bd] border border-[#b9d2bd]/30">
+              <span className="inline-flex items-center gap-1.5 rounded-none bg-[#233623] px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#b9d2bd] border border-[#b9d2bd]/30">
                 <GraduationCap className="h-3.5 w-3.5 text-[#b9d2bd]" />
                 {details.snapshot.degreeLevel}
               </span>
               <span className="text-xs uppercase tracking-wider text-white/60">
                 University of Swat
               </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-950/80 px-3 py-1 text-xs font-medium text-emerald-300 border border-emerald-700/40">
+              <span className="inline-flex items-center gap-1.5 rounded-none bg-emerald-950/80 px-3 py-1 text-xs font-medium text-emerald-300 border border-emerald-700/40">
                 <CheckCircle2 className="h-3.5 w-3.5" />
                 {details.enrollment.admissionStatus}
               </span>
@@ -169,14 +169,14 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/admissions"
-                className="inline-flex items-center gap-2 rounded-md bg-[#233623] px-6 py-3 text-sm font-medium text-white border border-[#b9d2bd]/40 shadow-sm transition-all hover:bg-[#2e472e] hover:border-[#b9d2bd]"
+                className="inline-flex items-center gap-2 rounded-none bg-[#233623] px-6 py-3 text-sm font-medium text-white border border-[#b9d2bd]/40 shadow-sm transition-all hover:bg-[#2e472e] hover:border-[#b9d2bd]"
               >
                 Apply for Admissions
                 <MoveRight className="h-4 w-4" />
               </Link>
               <a
                 href="#scheme-of-study"
-                className="inline-flex items-center gap-2 rounded-md bg-white/10 px-5 py-3 text-sm font-medium text-white backdrop-blur-sm transition-all hover:bg-white/20"
+                className="inline-flex items-center gap-2 rounded-none bg-white/10 px-5 py-3 text-sm font-medium text-white backdrop-blur-sm transition-all hover:bg-white/20"
               >
                 <BookOpen className="h-4 w-4 text-[#b9d2bd]" />
                 View Scheme of Study
@@ -184,7 +184,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
               {details.curriculum.length > 0 && (
                 <a
                   href="#scheme-of-study"
-                  className="inline-flex items-center gap-2 rounded-md bg-white/10 px-5 py-3 text-sm font-medium text-white backdrop-blur-sm transition-all hover:bg-white/20"
+                  className="inline-flex items-center gap-2 rounded-none bg-white/10 px-5 py-3 text-sm font-medium text-white backdrop-blur-sm transition-all hover:bg-white/20"
                 >
                   <Download className="h-4 w-4 text-[#b9d2bd]" />
                   Curriculum (BOS)
@@ -206,7 +206,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
               <li key={item.href} className="shrink-0">
                 <a
                   href={item.href}
-                  className="rounded-full px-3.5 py-1.5 transition-colors hover:bg-emerald-50 hover:text-emerald-900 focus:outline-none focus:ring-2 focus:ring-emerald-700"
+                  className="rounded-none px-3.5 py-1.5 transition-colors hover:bg-emerald-50 hover:text-emerald-900 focus:outline-none focus:ring-2 focus:ring-emerald-700"
                 >
                   {item.label}
                 </a>
@@ -240,9 +240,9 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
 
               {/* Pillars Grid */}
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-xs">
+                <div className="rounded-none border border-gray-200 bg-white p-5 shadow-xs">
                   <div className="flex items-center gap-3">
-                    <div className="rounded-md bg-emerald-50 p-2.5 text-emerald-800">
+                    <div className="rounded-none bg-emerald-50 p-2.5 text-emerald-800">
                       <Layers className="h-5 w-5" />
                     </div>
                     <h3 className="font-medium text-charcoal">Curriculum Integrity</h3>
@@ -252,9 +252,9 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                   </p>
                 </div>
 
-                <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-xs">
+                <div className="rounded-none border border-gray-200 bg-white p-5 shadow-xs">
                   <div className="flex items-center gap-3">
-                    <div className="rounded-md bg-emerald-50 p-2.5 text-emerald-800">
+                    <div className="rounded-none bg-emerald-50 p-2.5 text-emerald-800">
                       <School className="h-5 w-5" />
                     </div>
                     <h3 className="font-medium text-charcoal">Doctoral Faculty</h3>
@@ -264,9 +264,9 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                   </p>
                 </div>
 
-                <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-xs">
+                <div className="rounded-none border border-gray-200 bg-white p-5 shadow-xs">
                   <div className="flex items-center gap-3">
-                    <div className="rounded-md bg-emerald-50 p-2.5 text-emerald-800">
+                    <div className="rounded-none bg-emerald-50 p-2.5 text-emerald-800">
                       <Sparkles className="h-5 w-5" />
                     </div>
                     <h3 className="font-medium text-charcoal">Research Ecosystem</h3>
@@ -276,9 +276,9 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                   </p>
                 </div>
 
-                <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-xs">
+                <div className="rounded-none border border-gray-200 bg-white p-5 shadow-xs">
                   <div className="flex items-center gap-3">
-                    <div className="rounded-md bg-emerald-50 p-2.5 text-emerald-800">
+                    <div className="rounded-none bg-emerald-50 p-2.5 text-emerald-800">
                       <Award className="h-5 w-5" />
                     </div>
                     <h3 className="font-medium text-charcoal">Recognized Credential</h3>
@@ -291,8 +291,8 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
             </div>
 
             {/* Department Info Side Card */}
-            <aside className="lg:col-span-4 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-              <div className="relative aspect-video w-full overflow-hidden rounded-lg mb-5">
+            <aside className="lg:col-span-4 rounded-none border border-gray-200 bg-white p-6 shadow-sm border-t-2 border-t-[#74201e]">
+              <div className="relative aspect-video w-full overflow-hidden rounded-none border border-gray-200 mb-5">
                 <Image
                   src={program.departmentImage}
                   alt={program.departmentName}
@@ -323,14 +323,14 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
               <div className="mt-6 flex flex-col gap-2.5">
                 <Link
                   href={program.departmentHref}
-                  className="inline-flex items-center justify-between rounded-md border border-[#233623] px-4 py-2.5 text-xs font-medium text-[#233623] hover:bg-[#233623] hover:text-white transition-colors"
+                  className="inline-flex items-center justify-between rounded-none border border-[#233623] px-4 py-2.5 text-xs font-medium text-[#233623] hover:bg-[#233623] hover:text-white transition-colors"
                 >
                   <span>Visit Department Page</span>
                   <ChevronRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href="/admissions"
-                  className="inline-flex items-center justify-between rounded-md bg-[#233623] px-4 py-2.5 text-xs font-medium text-white hover:bg-[#2e472e] transition-colors"
+                  className="inline-flex items-center justify-between rounded-none bg-[#233623] px-4 py-2.5 text-xs font-medium text-white hover:bg-[#2e472e] transition-colors"
                 >
                   <span>Check Admissions</span>
                   <ChevronRight className="h-4 w-4" />
@@ -354,7 +354,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
             </p>
 
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-              <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-xs hover:border-[#b9d2bd] transition-colors">
+              <div className="rounded-none border border-gray-200 bg-white p-5 shadow-xs hover:border-[#b9d2bd] transition-colors">
                 <div className="flex items-center gap-2 text-emerald-800 text-xs font-semibold uppercase tracking-wider">
                   <Clock className="h-4 w-4" />
                   Duration
@@ -367,7 +367,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                 </p>
               </div>
 
-              <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-xs hover:border-[#b9d2bd] transition-colors">
+              <div className="rounded-none border border-gray-200 bg-white p-5 shadow-xs hover:border-[#b9d2bd] transition-colors">
                 <div className="flex items-center gap-2 text-emerald-800 text-xs font-semibold uppercase tracking-wider">
                   <Layers className="h-4 w-4" />
                   Credit Hours
@@ -380,7 +380,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                 </p>
               </div>
 
-              <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-xs hover:border-[#b9d2bd] transition-colors">
+              <div className="rounded-none border border-gray-200 bg-white p-5 shadow-xs hover:border-[#b9d2bd] transition-colors">
                 <div className="flex items-center gap-2 text-emerald-800 text-xs font-semibold uppercase tracking-wider">
                   <GraduationCap className="h-4 w-4" />
                   Degree Level
@@ -393,7 +393,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                 </p>
               </div>
 
-              <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-xs hover:border-[#b9d2bd] transition-colors">
+              <div className="rounded-none border border-gray-200 bg-white p-5 shadow-xs hover:border-[#b9d2bd] transition-colors">
                 <div className="flex items-center gap-2 text-emerald-800 text-xs font-semibold uppercase tracking-wider">
                   <MapPin className="h-4 w-4" />
                   Campus Location
@@ -406,7 +406,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                 </p>
               </div>
 
-              <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-xs hover:border-[#b9d2bd] transition-colors">
+              <div className="rounded-none border border-gray-200 bg-white p-5 shadow-xs hover:border-[#b9d2bd] transition-colors">
                 <div className="flex items-center gap-2 text-emerald-800 text-xs font-semibold uppercase tracking-wider">
                   <Calendar className="h-4 w-4" />
                   Intake Cycles
@@ -419,7 +419,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                 </p>
               </div>
 
-              <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-xs hover:border-[#b9d2bd] transition-colors">
+              <div className="rounded-none border border-gray-200 bg-white p-5 shadow-xs hover:border-[#b9d2bd] transition-colors">
                 <div className="flex items-center gap-2 text-emerald-800 text-xs font-semibold uppercase tracking-wider">
                   <Award className="h-4 w-4" />
                   Awarding Body
@@ -432,7 +432,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                 </p>
               </div>
 
-              <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-xs hover:border-[#b9d2bd] transition-colors">
+              <div className="rounded-none border border-gray-200 bg-white p-5 shadow-xs hover:border-[#b9d2bd] transition-colors">
                 <div className="flex items-center gap-2 text-emerald-800 text-xs font-semibold uppercase tracking-wider">
                   <ShieldCheck className="h-4 w-4" />
                   Accreditation
@@ -445,7 +445,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                 </p>
               </div>
 
-              <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-xs hover:border-[#b9d2bd] transition-colors">
+              <div className="rounded-none border border-gray-200 bg-white p-5 shadow-xs hover:border-[#b9d2bd] transition-colors">
                 <div className="flex items-center gap-2 text-emerald-800 text-xs font-semibold uppercase tracking-wider">
                   <Users className="h-4 w-4" />
                   Class Capacity
@@ -476,7 +476,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
 
             <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
               {/* Left: Capacity and Quota Table */}
-              <div className="lg:col-span-8 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+              <div className="lg:col-span-8 rounded-none border border-gray-200 bg-white p-6 shadow-sm">
                 <div className="flex flex-wrap items-center justify-between gap-4 border-b border-gray-100 pb-5">
                   <div>
                     <h3 className="text-lg font-semibold text-charcoal">
@@ -486,7 +486,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                       Approved by Academic Council for {details.enrollment.sessionLabel}
                     </p>
                   </div>
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-800 border border-emerald-200">
+                  <span className="inline-flex items-center gap-1.5 rounded-none bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-800 border border-emerald-200">
                     <Users className="h-3.5 w-3.5" />
                     Total Capacity: {details.enrollment.annualSeats} Candidates
                   </span>
@@ -522,7 +522,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
 
               {/* Right: Application Mode & Facilities */}
               <div className="lg:col-span-4 space-y-5">
-                <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+                <div className="rounded-none border border-gray-200 bg-white p-6 shadow-sm border-t-2 border-t-[#74201e]">
                   <div className="flex items-center gap-2.5 text-[#233623] font-semibold text-sm">
                     <FileCheck2 className="h-5 w-5" />
                     Application Procedure
@@ -539,7 +539,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                   </Link>
                 </div>
 
-                <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+                <div className="rounded-none border border-gray-200 bg-white p-6 shadow-sm border-t-2 border-t-[#74201e]">
                   <div className="flex items-center gap-2.5 text-[#233623] font-semibold text-sm">
                     <Building2 className="h-5 w-5" />
                     Hostel & Transport Network
@@ -568,13 +568,13 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
 
             <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Academic Background & Minimum Marks */}
-              <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+              <div className="rounded-none border border-gray-200 bg-white p-6 shadow-sm border-t-2 border-t-[#74201e]">
                 <div className="flex items-center gap-2 text-emerald-800 text-xs font-semibold uppercase tracking-wider">
                   <Award className="h-4 w-4" />
                   Required Academic Credentials
                 </div>
 
-                <div className="mt-4 rounded-lg bg-emerald-50/70 border border-emerald-200/60 p-4">
+                <div className="mt-4 rounded-none bg-emerald-50/70 border border-emerald-200/60 p-4">
                   <p className="text-xs font-semibold uppercase tracking-wider text-emerald-900">
                     Minimum Benchmark
                   </p>
@@ -608,13 +608,13 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
               </div>
 
               {/* Required Documents & Verification */}
-              <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+              <div className="rounded-none border border-gray-200 bg-white p-6 shadow-sm border-t-2 border-t-[#74201e]">
                 <div className="flex items-center gap-2 text-emerald-800 text-xs font-semibold uppercase tracking-wider">
                   <FileText className="h-4 w-4" />
                   Documentation & Guidelines
                 </div>
 
-                <div className="mt-4 rounded-lg bg-amber-50/70 border border-amber-200/60 p-4">
+                <div className="mt-4 rounded-none bg-amber-50/70 border border-amber-200/60 p-4">
                   <p className="text-xs font-semibold uppercase tracking-wider text-amber-900">
                     Age Limit Regulation
                   </p>
@@ -630,7 +630,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                   <ul className="mt-3 space-y-2.5 text-xs sm:text-sm text-gray-600">
                     {details.eligibility.entryRequirements.map((req, idx) => (
                       <li key={idx} className="flex items-start gap-2.5">
-                        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gray-100 text-[11px] font-semibold text-gray-700">
+                        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-none border border-gray-200 bg-gray-100 text-[11px] font-semibold text-gray-700">
                           {idx + 1}
                         </span>
                         <span>{req}</span>
@@ -666,13 +666,13 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
               {details.learningOutcomes.map((outcome, idx) => (
                 <div
                   key={outcome.title}
-                  className="rounded-xl border border-gray-200 bg-white p-6 shadow-xs hover:border-[#b9d2bd] hover:shadow-sm transition-all"
+                  className="rounded-none border border-gray-200 bg-white p-6 shadow-xs hover:border-[#74201e] hover:shadow-sm transition-all"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-none bg-emerald-50 text-emerald-800 text-xs font-bold border border-emerald-200">
                       0{idx + 1}
                     </span>
-                    <span className="rounded-full bg-gray-100 px-2.5 py-0.5 text-[11px] font-medium text-gray-600">
+                    <span className="rounded-none bg-gray-100 px-2.5 py-0.5 text-[11px] font-medium text-gray-600 border border-gray-200">
                       {outcome.category}
                     </span>
                   </div>
@@ -688,8 +688,8 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
               ))}
 
               {/* Research & Innovation Card */}
-              <div className="rounded-xl border border-emerald-200 bg-gradient-to-br from-[#233623] to-[#17231d] p-6 text-white shadow-xs">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-[#b9d2bd] text-xs font-bold">
+              <div className="rounded-none border border-emerald-900 bg-gradient-to-br from-[#233623] to-[#17231d] p-6 text-white shadow-xs">
+                <div className="flex h-8 w-8 items-center justify-center rounded-none bg-white/10 text-[#b9d2bd] text-xs font-bold border border-white/20">
                   <Lightbulb className="h-4 w-4" />
                 </div>
                 <h3 className="mt-4 text-base font-semibold text-white">
@@ -728,7 +728,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                       href={c.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-md border border-gray-300 bg-white px-3.5 py-2 text-xs font-medium text-charcoal shadow-xs hover:border-[#233623] hover:text-[#233623] transition-colors"
+                      className="inline-flex items-center gap-2 rounded-none border border-gray-300 bg-white px-3.5 py-2 text-xs font-medium text-charcoal shadow-xs hover:border-[#233623] hover:text-[#233623] transition-colors"
                     >
                       <Download className="h-3.5 w-3.5 text-emerald-800" />
                       <span>{c.title.length > 30 ? `${c.title.slice(0, 30)}...` : c.title}</span>
@@ -739,7 +739,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
             </div>
 
             {/* Total Credit Metric Banner */}
-            <div className="mt-6 flex flex-wrap items-center gap-6 rounded-lg bg-emerald-50/70 border border-emerald-200/60 p-4 text-xs sm:text-sm text-emerald-950">
+            <div className="mt-6 flex flex-wrap items-center gap-6 rounded-none bg-emerald-50/70 border border-emerald-200/60 p-4 text-xs sm:text-sm text-emerald-950">
               <div>
                 <span className="font-semibold text-emerald-900">Total Program Credit Hours:</span>{" "}
                 <span className="font-bold">{totalDegreeCredits > 0 ? `${totalDegreeCredits} Credits` : details.snapshot.creditHours}</span>
@@ -766,7 +766,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                       key={sem.semesterNumber}
                       type="button"
                       onClick={() => setActiveSemester(sem.semesterNumber)}
-                      className={`rounded-lg px-4 py-2 text-xs sm:text-sm font-semibold transition-all ${
+                      className={`rounded-none px-4 py-2 text-xs sm:text-sm font-semibold transition-all ${
                         isCurrent
                           ? "bg-[#233623] text-white shadow-sm"
                           : "bg-white text-gray-700 border border-gray-200 hover:bg-gray-100"
@@ -779,7 +779,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
               </div>
 
               {/* Active Semester Courses Table */}
-              <div className="mt-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+              <div className="mt-6 rounded-none border border-gray-200 bg-white p-6 shadow-sm border-t-2 border-t-[#74201e]">
                 <div className="flex flex-wrap items-center justify-between gap-4 border-b border-gray-100 pb-4">
                   <div>
                     <h3 className="text-lg font-semibold text-charcoal">
@@ -789,7 +789,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                       Standard course allocation approved by the Board of Studies
                     </p>
                   </div>
-                  <span className="rounded-full bg-emerald-100/70 px-3.5 py-1 text-xs font-semibold text-emerald-900">
+                  <span className="rounded-none bg-emerald-100/70 border border-emerald-300 px-3.5 py-1 text-xs font-semibold text-emerald-900">
                     Semester Credits: {currentSemesterData.totalCredits} Cr
                   </span>
                 </div>
@@ -808,7 +808,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                       {currentSemesterData.courses.map((course) => (
                         <tr key={course.code} className="hover:bg-gray-50/75 transition-colors">
                           <td className="px-4 py-3.5">
-                            <span className="inline-block rounded-md bg-gray-100 px-2.5 py-1 text-xs font-mono font-medium text-gray-800">
+                            <span className="inline-block rounded-none bg-gray-100 border border-gray-200 px-2.5 py-1 text-xs font-mono font-medium text-gray-800">
                               {course.code}
                             </span>
                           </td>
@@ -817,7 +817,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                           </td>
                           <td className="px-4 py-3.5">
                             <span
-                              className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                              className={`inline-block rounded-none px-2.5 py-0.5 text-xs font-medium ${
                                 course.type === "Core"
                                   ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
                                   : course.type === "Lab"
@@ -826,7 +826,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                                   ? "bg-purple-50 text-purple-800 border border-purple-200"
                                   : course.type === "Elective"
                                   ? "bg-amber-50 text-amber-800 border border-amber-200"
-                                  : "bg-gray-100 text-gray-700"
+                                  : "bg-gray-100 text-gray-700 border border-gray-200"
                               }`}
                             >
                               {course.type}
@@ -868,7 +868,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
 
             <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Target Sectors */}
-              <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+              <div className="rounded-none border border-gray-200 bg-white p-6 shadow-sm border-t-2 border-t-[#74201e]">
                 <div className="flex items-center gap-2 text-emerald-800 text-xs font-semibold uppercase tracking-wider mb-4">
                   <Building2 className="h-4 w-4" />
                   Key Industry Sectors
@@ -876,7 +876,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                 <ul className="space-y-3">
                   {details.careerProspects.sectors.map((sector) => (
                     <li key={sector} className="flex items-start gap-2.5 text-xs sm:text-sm text-gray-700">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-700 mt-2 shrink-0" />
+                      <span className="h-1.5 w-1.5 rounded-none bg-emerald-700 mt-2 shrink-0" />
                       <span>{sector}</span>
                     </li>
                   ))}
@@ -884,7 +884,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
               </div>
 
               {/* Target Roles */}
-              <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+              <div className="rounded-none border border-gray-200 bg-white p-6 shadow-sm border-t-2 border-t-[#74201e]">
                 <div className="flex items-center gap-2 text-emerald-800 text-xs font-semibold uppercase tracking-wider mb-4">
                   <Briefcase className="h-4 w-4" />
                   Typical Designations & Roles
@@ -893,7 +893,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
                   {details.careerProspects.roles.map((role) => (
                     <span
                       key={role}
-                      className="rounded-lg bg-emerald-50 px-3 py-1.5 text-xs font-medium text-emerald-900 border border-emerald-200/60"
+                      className="rounded-none bg-emerald-50 px-3 py-1.5 text-xs font-medium text-emerald-900 border border-emerald-200/60"
                     >
                       {role}
                     </span>
@@ -902,7 +902,7 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
               </div>
 
               {/* Higher Studies & Scholarships */}
-              <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+              <div className="rounded-none border border-gray-200 bg-white p-6 shadow-sm border-t-2 border-t-[#74201e]">
                 <div className="flex items-center gap-2 text-emerald-800 text-xs font-semibold uppercase tracking-wider mb-4">
                   <GraduationCap className="h-4 w-4" />
                   Higher Studies & Research
@@ -921,9 +921,9 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
         </section>
 
         {/* Admissions CTA Banner */}
-        <section className="rounded-2xl bg-gradient-to-br from-[#233623] via-[#17231d] to-[#121c17] p-8 sm:p-12 text-white shadow-lg">
+        <section className="rounded-none border border-[#233623] bg-gradient-to-br from-[#233623] via-[#17231d] to-[#121c17] p-8 sm:p-12 text-white shadow-lg">
           <div className="max-w-3xl">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#b9d2bd] border border-white/15">
+            <span className="inline-flex items-center gap-1.5 rounded-none bg-white/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#b9d2bd] border border-white/15">
               <Sparkles className="h-3.5 w-3.5 text-[#b9d2bd]" />
               Start Your Academic Journey
             </span>
@@ -937,14 +937,14 @@ export function ProgramAbout({ program }: ProgramAboutProps) {
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 href="/admissions"
-                className="inline-flex items-center gap-2 rounded-md bg-[#b9d2bd] px-6 py-3 text-sm font-semibold text-[#17231d] shadow-sm hover:bg-white transition-colors"
+                className="inline-flex items-center gap-2 rounded-none bg-[#b9d2bd] px-6 py-3 text-sm font-semibold text-[#17231d] shadow-sm hover:bg-white transition-colors"
               >
                 Apply Online Now
                 <MoveRight className="h-4 w-4" />
               </Link>
               <Link
                 href={program.departmentHref}
-                className="inline-flex items-center gap-2 rounded-md bg-white/10 px-6 py-3 text-sm font-medium text-white hover:bg-white/20 transition-colors"
+                className="inline-flex items-center gap-2 rounded-none bg-white/10 px-6 py-3 text-sm font-medium text-white hover:bg-white/20 transition-colors"
               >
                 Learn More About {program.departmentName}
               </Link>

@@ -273,7 +273,7 @@ export const Header = () => {
                     "object-contain transition-opacity duration-500 ease-out",
                     atHeroTop ? "opacity-100" : "opacity-0"
                   )}
-                  priority={atHeroTop}
+                  priority
                 />
                 <Image
                   src={IMAGES.logo.main}
@@ -285,7 +285,7 @@ export const Header = () => {
                     "object-contain transition-opacity duration-500 ease-out",
                     atHeroTop ? "opacity-0" : "opacity-100"
                   )}
-                  priority={!atHeroTop}
+                  priority
                 />
               </span>
               <UniversityWordmark dark={!atHeroTop} />
@@ -439,8 +439,6 @@ export const Header = () => {
 
                 <Link
                   href={NAVIGATION.topBar.actions[0].href}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="hidden h-[50px] items-center justify-center gap-2 rounded-md border-l border-white/20 bg-white px-4 text-[15px] font-medium text-[#17231d] transition-colors duration-200 hover:bg-[#74201e] hover:text-white md:inline-flex xl:w-[150px]"
                 >
                   <GraduationCap size={19} strokeWidth={ICON_STROKE} />
@@ -835,7 +833,7 @@ const MegaPanel = ({
               width={400}
               height={200}
               className="w-full h-32 object-cover rounded-md mb-3"
-              priority
+              loading="lazy"
             />
             <h3 className="text-sm font-medium text-charcoal mb-1.5">{content.promo.title}</h3>
             <p className="text-xs text-gray-500 mb-3 leading-relaxed">{content.promo.text}</p>

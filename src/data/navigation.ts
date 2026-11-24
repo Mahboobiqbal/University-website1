@@ -15,7 +15,7 @@ export const NAVIGATION = {
       { label: "Contact Us", href: "/contact" },
     ],
     actions: [
-      { label: "Apply Now", href: "https://cms1.uswat.edu.pk/", external: true },
+      { label: "Apply Now", href: "/apply" },
       { label: "Faculty Login", href: "http://cms1.uswat.edu.pk/", external: true },
       { label: "Student Login", href: "http://cms1.uswat.edu.pk/", external: true },
     ],

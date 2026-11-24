@@ -62,7 +62,7 @@ export function AdmissionRoadmapBahria({ level, initialCampus }: Props) {
 
   return (
     <article className="bg-white">
-      <header className="relative overflow-hidden bg-[#17231d] px-6 py-12 text-white sm:px-10 lg:px-14 lg:py-16">
+      <header className="relative overflow-hidden bg-[#17231d] px-6 pb-12 pt-28 text-white sm:px-10 sm:pb-14 sm:pt-36 lg:px-14 lg:pb-16 lg:pt-44 xl:pt-[185px]">
         <div className="absolute inset-0 bg-gradient-to-br from-[#233623] via-[#233623]/95 to-[#17231d]" aria-hidden="true" />
         <div className="relative z-10 mx-auto flex max-w-[1440px] flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>

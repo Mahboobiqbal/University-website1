@@ -57,7 +57,7 @@ export default async function ProgramsPage({ searchParams }: ProgramsPageProps) 
                 key={filter.label}
                 href={filter.href}
                 aria-current={active ? "page" : undefined}
-                className={`rounded-full border px-5 py-2.5 text-sm font-medium transition-colors ${
+                className={`rounded-none border px-5 py-2 text-sm font-medium transition-colors ${
                   active
                     ? "border-[#74201e] bg-[#74201e] text-white"
                     : "border-gray-200 text-gray-600 hover:border-[#74201e] hover:text-[#74201e]"

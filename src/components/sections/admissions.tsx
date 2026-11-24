@@ -195,7 +195,7 @@ export function AdmissionsSection({ compact = false }: { compact?: boolean }) {
           src="/class-picture.jpg"
           alt="University of Swat students"
           fill
-          priority
+          loading="lazy"
           sizes="100vw"
           className="object-cover"
         />
