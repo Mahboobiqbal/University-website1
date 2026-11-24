@@ -556,6 +556,8 @@ export const Header = () => {
             </div>
             <form
               onSubmit={handleSearchSubmit}
+              action="/search"
+              method="GET"
               role="search"
               className="flex-1 px-6 lg:px-10 pt-10"
             >
