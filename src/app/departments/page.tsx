@@ -13,7 +13,8 @@ export const metadata = {
 export default function DepartmentsPage() {
   return (
     <InnerPageLayout>
-      <div className="mb-12">
+      <section className="bg-white px-5 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-14">
+        <div className="mb-12">
         <p className="text-xs font-medium text-brand uppercase tracking-wider mb-3">Academics</p>
         <h1 className="text-4xl md:text-5xl font-light text-charcoal mb-4 text-balance">
           Departments
@@ -37,7 +38,7 @@ export default function DepartmentsPage() {
                 <Link
                   key={dept.id}
                   href={dept.href}
-                  className="group rounded-xl border border-gray-200 overflow-hidden bg-white hover:border-brand hover:shadow-lg transition-all duration-300"
+                  className="group rounded-none border border-[#e7e5df] overflow-hidden bg-white hover:border-[#74201e] hover:shadow-md transition-all duration-300"
                 >
                   <div className="relative h-40 w-full overflow-hidden">
                     <Image
@@ -68,6 +69,7 @@ export default function DepartmentsPage() {
           </div>
         </section>
       ))}
+      </section>
     </InnerPageLayout>
   );
 }

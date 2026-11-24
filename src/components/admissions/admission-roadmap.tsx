@@ -80,7 +80,7 @@ export function AdmissionRoadmap({ level, initialCampus }: AdmissionRoadmapProps
 
   return (
     <main className="bg-white">
-      <header className="bg-[#233623] px-5 py-10 text-white sm:px-8 lg:px-12 lg:py-14">
+      <header className="bg-[#233623] px-5 pb-10 pt-28 text-white sm:px-8 sm:pb-12 sm:pt-36 lg:px-12 lg:pb-14 lg:pt-44 xl:pt-[185px]">
         <div className="mx-auto max-w-7xl">
           <nav aria-label="Breadcrumb" className="mb-7 text-sm text-white/75">
             <Link href="/admissions" className="transition-colors hover:text-white">

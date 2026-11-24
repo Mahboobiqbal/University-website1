@@ -15,12 +15,14 @@ export interface BreadcrumbItem {
 interface InnerPageLayoutProps {
   children: React.ReactNode;
   className?: string;
+  contentClassName?: string;
   breadcrumbs?: BreadcrumbItem[];
 }
 
 export const InnerPageLayout: React.FC<InnerPageLayoutProps> = ({
   children,
   className,
+  contentClassName,
   breadcrumbs,
 }) => {
   const pathname = usePathname() || "/";
@@ -102,7 +104,12 @@ export const InnerPageLayout: React.FC<InnerPageLayoutProps> = ({
             ))}
           </ol>
         </nav>
-        <div className="inner-page-content overflow-hidden border border-[#e7e5df] bg-white shadow-[0_12px_40px_rgba(27,35,27,0.04)]">
+        <div
+          className={cn(
+            "inner-page-content overflow-hidden border border-[#e7e5df] bg-white shadow-[0_12px_40px_rgba(27,35,27,0.04)]",
+            contentClassName
+          )}
+        >
           {children}
         </div>
       </motion.div>

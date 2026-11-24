@@ -38,7 +38,7 @@ export function AdmissionsLanding() {
 
   return (
     <article className="bg-white">
-      <section className="relative isolate flex min-h-[380px] items-center justify-center overflow-hidden bg-[#17231d] px-4 py-16 text-center text-white sm:px-8 lg:min-h-[440px] lg:py-20">
+      <section className="relative isolate flex min-h-[440px] items-center justify-center overflow-hidden bg-[#17231d] px-4 pb-16 pt-28 text-center text-white sm:px-8 sm:pb-20 sm:pt-36 lg:min-h-[500px] lg:pb-24 lg:pt-44 xl:pt-[185px]">
         <Image
           src="/class-picture.jpg"
           alt="Students on campus"

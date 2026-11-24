@@ -73,6 +73,7 @@ export default async function FacultyProfilePage({ params }: Props) {
                   alt={faculty.name}
                   fill
                   priority
+                  unoptimized={Boolean(faculty.image?.includes("uswat.edu.pk"))}
                   sizes="(max-width: 1024px) 280px, 320px"
                   className="object-cover object-top"
                 />

@@ -7,10 +7,12 @@ const projectRoot = fs.realpathSync?.native
   : process.cwd();
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ["127.0.0.1", "localhost"],
-  experimental: {
-    cpus: 1,
-  },
+  allowedDevOrigins: [
+    "127.0.0.1",
+    "localhost",
+    "127.0.0.1:3000",
+    "localhost:3000",
+  ],
   webpack: (config) => {
     config.context = projectRoot;
     config.resolve = config.resolve || {};
@@ -21,6 +23,8 @@ const nextConfig: NextConfig = {
     return config;
   },
   images: {
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 86400,
     remotePatterns: [
       {
         protocol: "https",

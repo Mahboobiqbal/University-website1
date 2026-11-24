@@ -32,28 +32,28 @@ export const RESEARCH = {
     {
       id: "oric",
       title: "Office of Research, Innovation and Commercialization (ORIC)",
-      image: "https://uswat.edu.pk/wp-content/uploads/elementor/thumbs/ORIC-okbh91fiha4e6no6guo2gtcj25nohm5k8yo2pewble.jpeg",
+      image: "https://images.pexels.com/photos/669623/pexels-photo-669623.jpeg?auto=compress&cs=tinysrgb&w=800",
       href: "https://uswat.edu.pk/oric-2/",
       external: true,
     },
     {
       id: "sujris",
       title: "Research Journals (SUJRIS)",
-      image: "https://uswat.edu.pk/wp-content/uploads/2026/02/WhatsApp-Image-2026-02-06-at-14.57.18-1024x341.jpeg",
+      image: "https://images.pexels.com/photos/5946614/pexels-photo-5946614.jpeg?auto=compress&cs=tinysrgb&w=800",
       href: "https://sujris.uswat.edu.pk/",
       external: true,
     },
     {
       id: "projects",
       title: "HEC Funded Research Projects",
-      image: "https://uswat.edu.pk/wp-content/uploads/2026/11/6.jpg",
+      image: "https://images.pexels.com/photos/3184285/pexels-photo-3184285.jpeg?auto=compress&cs=tinysrgb&w=800",
       href: "https://uswat.edu.pk/oric-2/",
       external: true,
     },
     {
       id: "qec",
       title: "Quality Enhancement Cell (QEC)",
-      image: "https://uswat.edu.pk/wp-content/uploads/elementor/thumbs/HEDRankingsAnnounced-ruhrfudjobinuhi790qmqz3aqtj9p7nu3q4b805tiq.jpeg",
+      image: "https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg?auto=compress&cs=tinysrgb&w=800",
       href: "https://uswat.edu.pk/quality-enhancement-cell/",
       external: true,
     },
@@ -80,7 +80,7 @@ export const EVENTS = {
       month: "Nov",
       year: "2026",
       title: "International Conference: One Planet One Health; Nature, Climate & Humanity",
-      image: "https://uswat.edu.pk/wp-content/uploads/2026/11/1.jpg",
+      image: "https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?auto=compress&cs=tinysrgb&w=800",
       href: "/events/one-planet-one-health",
     },
     {
@@ -88,7 +88,7 @@ export const EVENTS = {
       month: "Nov",
       year: "2026",
       title: "Seminar on Anti Drug Awareness",
-      image: "https://uswat.edu.pk/wp-content/uploads/2026/11/2.jpg",
+      image: "https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?auto=compress&cs=tinysrgb&w=800",
       href: "/events/seminar-anti-drug-awareness",
     },
     {
@@ -96,7 +96,7 @@ export const EVENTS = {
       month: "Nov",
       year: "2026",
       title: "University of Swat Joins Hands with NCHD for \"Each One Teach One\"",
-      image: "https://uswat.edu.pk/wp-content/uploads/2026/11/3.jpg",
+      image: "https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&cs=tinysrgb&w=800",
       href: "/events/each-one-teach-one",
     },
     {
@@ -104,7 +104,7 @@ export const EVENTS = {
       month: "Nov",
       year: "2026",
       title: "One-Day Seminar on \"Robot Trader: Algorithmic Trading for a Smarter Financial Future\"",
-      image: "https://uswat.edu.pk/wp-content/uploads/2026/11/4.jpg",
+      image: "https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800",
       href: "/events/robot-trader-seminar",
     },
     {
@@ -112,7 +112,7 @@ export const EVENTS = {
       month: "Nov",
       year: "2026",
       title: "MoU with Sri Lankan NIIBS on Gandhara Civilization",
-      image: "https://uswat.edu.pk/wp-content/uploads/2026/11/5.jpg",
+      image: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800",
       href: "/events/gandhara-civilization-mou",
     },
     {
@@ -120,7 +120,7 @@ export const EVENTS = {
       month: "Oct",
       year: "2026",
       title: "University of Swat Solarization Project Launch",
-      image: "https://uswat.edu.pk/wp-content/uploads/2026/11/6.jpg",
+      image: "https://images.pexels.com/photos/97799/pexels-photo-97799.jpeg?auto=compress&cs=tinysrgb&w=800",
       href: "/events/solarization-project",
     },
   ],
@@ -136,7 +136,7 @@ export const NEWS = {
     month: "Nov 2026",
     excerpt:
       "The partnership is intended to create student volunteer, internship, leadership, and community-service opportunities.",
-    image: "https://uswat.edu.pk/wp-content/uploads/2026/11/WhatsApp-Image-2026-11-19-at-14.41.31-2.jpeg",
+    image: "https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&cs=tinysrgb&w=800",
     href: "/news/university-of-swat-signs-mou-with-helping-hand-for-relief-and-development-hhrd",
     officialHref:
       "https://uswat.edu.pk/2026/11/university-of-swat-signs-mou-with-helping-hand-for-relief-and-development-hhrd/",
@@ -148,7 +148,7 @@ export const NEWS = {
       month: "Nov 2026",
       excerpt:
         "At a student session at the University of Swat, the Higher Education Advisor spoke about persistence, curiosity, resilience, and collaboration.",
-      image: "https://uswat.edu.pk/wp-content/uploads/2026/11/WhatsApp-Image-2026-11-19-at-14.25.01-2-1024x682.jpeg",
+      image: "https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=800",
       href: "/news/sustained-effort-courage-and-honesty-are-essential-for-a-bright-future-dr-syed-aamer-abdullah",
       officialHref:
         "https://uswat.edu.pk/2026/11/sustained-effort-courage-and-honesty-are-essential-for-a-bright-future-dr-syed-aamer-abdullah/",
@@ -159,7 +159,7 @@ export const NEWS = {
       month: "Nov 2026",
       excerpt:
         "The announced agreement will establish a university-based digital preparation program with accessible online coaching and specialist lectures.",
-      image: "https://uswat.edu.pk/wp-content/uploads/2026/11/WhatsApp-Image-2026-11-18-at-10.32.49-5.jpeg",
+      image: "https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=800",
       href: "/news/university-of-swat-has-signed-a-mou-with-house-of-commons-academy-islamabad-to-establish-and-operate-a-dedicated-university-based-digital-civil-services-preparation-program",
       officialHref:
         "https://uswat.edu.pk/2026/11/university-of-swat-has-signed-a-mou-with-house-of-commons-academy-islamabad-to-establish-and-operate-a-dedicated-university-based-digital-civil-services-preparation-program/",
@@ -170,7 +170,7 @@ export const NEWS = {
       month: "Nov 2026",
       excerpt:
         "The Office of the Provost and District Youth Affairs, Swat, held an awareness seminar for students at the university's Theatre Hall.",
-      image: "https://uswat.edu.pk/wp-content/uploads/2026/11/2.jpg",
+      image: "https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?auto=compress&cs=tinysrgb&w=800",
       href: "/news/seminar-on-anti-drug-awareness",
       officialHref: "https://uswat.edu.pk/2026/11/seminar-on-anti-drug-awareness/",
     },
@@ -180,7 +180,7 @@ export const NEWS = {
       month: "Nov 2026",
       excerpt:
         "The agreement with the National Commission for Human Development will involve university students in a literacy initiative.",
-      image: "https://uswat.edu.pk/wp-content/uploads/2026/11/3.jpg",
+      image: "https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg?auto=compress&cs=tinysrgb&w=800",
       href: "/news/university-of-swat-joins-hands-with-nchd-for-each-one-teach-one",
       officialHref:
         "https://uswat.edu.pk/2026/11/university-of-swat-joins-hands-with-nchd-for-each-one-teach-one/",
@@ -195,9 +195,9 @@ export const LIFE = {
     "Our community embodies excellence and fosters the guiding values of leadership, innovation and discovery.",
   button: { label: "Discover more", href: "/campuses" },
   sliderImages: [
-    "https://uswat.edu.pk/wp-content/uploads/2026/11/6.jpg",
-    "https://uswat.edu.pk/wp-content/uploads/2026/11/7.jpg",
-    "https://uswat.edu.pk/wp-content/uploads/2026/11/8.jpg",
+    "https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "https://images.pexels.com/photos/1438072/pexels-photo-1438072.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "https://images.pexels.com/photos/207729/pexels-photo-207729.jpeg?auto=compress&cs=tinysrgb&w=800",
   ],
   stats: [
     { label: "Students", value: "3000" },
@@ -252,17 +252,17 @@ export const ABOUT = {
 export const QUICK_ACCESS = {
   heading: "Quick Access",
   tiles: [
-    { label: "Administrative Offices", href: "https://uswat.edu.pk/maincampus/", external: true, image: "https://uswat.edu.pk/wp-content/uploads/elementor/thumbs/admin-p8hrk8vsk45l6ari014ojebledgmeg2aw4enkbd1o2.jpg" },
-    { label: "Examinations", href: "http://exam.uswat.edu.pk/", external: true, image: "https://uswat.edu.pk/wp-content/uploads/elementor/thumbs/exam-p8hrn65ptk5pamikxamwanr7xj1qcjo8mlh1bb0yb6.jpg" },
-    { label: "Quality Enhancement Cell", href: "https://uswat.edu.pk/quality-enhancement-cell/", external: true, image: "https://uswat.edu.pk/wp-content/uploads/elementor/thumbs/HEDRankingsAnnounced-ruhrfudjobinuhi790qmqz3aqtj9p7nu3q4b805tiq.jpeg" },
-    { label: "ORIC", href: "https://uswat.edu.pk/oric-2/", external: true, image: "https://uswat.edu.pk/wp-content/uploads/elementor/thumbs/ORIC-okbh91fiha4e6no6guo2gtcj25nohm5k8yo2pewble.jpeg" },
-    { label: "Main Campus", href: "/campuses", image: "https://uswat.edu.pk/wp-content/uploads/elementor/thumbs/WhatsApp-Image-2021-11-05-at-10.51.45-AM-pflqkzvktg8ddutd0sn4prwl1tj4kzufodulzc1nea.jpeg" },
-    { label: "Women Campus", href: "/campuses", image: "https://uswat.edu.pk/wp-content/uploads/elementor/thumbs/WC-01-qifli6radkjm2a5bb91tvyv4g9k11d9zck5nxzbeeq.jpg" },
+    { label: "Administrative Offices", href: "https://uswat.edu.pk/maincampus/", external: true, image: "https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?auto=compress&cs=tinysrgb&w=800" },
+    { label: "Examinations", href: "http://exam.uswat.edu.pk/", external: true, image: "https://images.pexels.com/photos/159775/library-la-trobe-study-students-159775.jpeg?auto=compress&cs=tinysrgb&w=800" },
+    { label: "Quality Enhancement Cell", href: "https://uswat.edu.pk/quality-enhancement-cell/", external: true, image: "https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?auto=compress&cs=tinysrgb&w=800" },
+    { label: "ORIC", href: "https://uswat.edu.pk/oric-2/", external: true, image: "https://images.pexels.com/photos/669623/pexels-photo-669623.jpeg?auto=compress&cs=tinysrgb&w=800" },
+    { label: "Main Campus", href: "/campuses", image: "https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg?auto=compress&cs=tinysrgb&w=800" },
+    { label: "Women Campus", href: "/campuses", image: "https://images.pexels.com/photos/1438072/pexels-photo-1438072.jpeg?auto=compress&cs=tinysrgb&w=800" },
   ],
 };
 
 export const FOOTER_BADGE = {
-  image: "https://uswat.edu.pk/wp-content/uploads/elementor/thumbs/HEDRankingsAnnounced-ruhrfudjobinuhi790qmqz3aqtj9p7nu3q4b805tiq.jpeg",
+  image: "/uos_logo.png",
   items: [
     { label: "Recognized by", value: "HEC", caption: "Higher Education Commission" },
     { label: "Quality assured by", value: "QEC", caption: "Quality Enhancement Cell" },
@@ -270,7 +270,7 @@ export const FOOTER_BADGE = {
 };
 
 export const FOOTER = {
-  logo: "https://uswat.edu.pk/wp-content/uploads/2026/08/776305345_1732553001344124_3192293907725027352_n-65x65.png",
+  logo: "/uos_logo_white.png",
   social: [
     { label: "Facebook", href: "https://www.facebook.com/universityofswat/", icon: "facebook" },
     { label: "LinkedIn", href: "https://www.linkedin.com/company/university-of-swat1/", icon: "linkedin" },
