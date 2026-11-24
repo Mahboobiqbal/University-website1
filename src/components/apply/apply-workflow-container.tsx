@@ -15,11 +15,6 @@ import {
   AlertCircle,
   ArrowRight,
   ArrowLeft,
-  Download,
-  Building2,
-  Calendar,
-  FileText,
-  Clock,
   Printer,
   Copy,
   Info,
@@ -49,20 +44,19 @@ export function ApplyWorkflowContainer() {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [formErrors, setFormErrors] = React.useState<Record<string, string>>({});
 
-  // Auto calculate FSc Percentage
-  React.useEffect(() => {
+  // Calculate percentages directly from form values (avoiding setState in effect)
+  const computedHsscPercentage = React.useMemo(() => {
     if (typeof formData.hsscObtainedMarks === "number" && typeof formData.hsscTotalMarks === "number" && formData.hsscTotalMarks > 0) {
-      const pct = parseFloat(((formData.hsscObtainedMarks / formData.hsscTotalMarks) * 100).toFixed(2));
-      setFormData((prev) => ({ ...prev, hsscPercentage: pct }));
+      return parseFloat(((formData.hsscObtainedMarks / formData.hsscTotalMarks) * 100).toFixed(2));
     }
+    return 0;
   }, [formData.hsscObtainedMarks, formData.hsscTotalMarks]);
 
-  // Auto calculate SSC Percentage
-  React.useEffect(() => {
+  const computedSscPercentage = React.useMemo(() => {
     if (typeof formData.sscObtainedMarks === "number" && typeof formData.sscTotalMarks === "number" && formData.sscTotalMarks > 0) {
-      const pct = parseFloat(((formData.sscObtainedMarks / formData.sscTotalMarks) * 100).toFixed(2));
-      setFormData((prev) => ({ ...prev, sscPercentage: pct }));
+      return parseFloat(((formData.sscObtainedMarks / formData.sscTotalMarks) * 100).toFixed(2));
     }
+    return 0;
   }, [formData.sscObtainedMarks, formData.sscTotalMarks]);
 
   const updateField = <K extends keyof ApplicationFormData>(key: K, value: ApplicationFormData[K]) => {
@@ -454,7 +448,7 @@ export function ApplyWorkflowContainer() {
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 text-sm">
                 <div>
                   <label className="block text-xs font-medium text-charcoal mb-1">
-                    Father's Name <span className="text-[#74201e]">*</span>
+                    Father&apos;s Name <span className="text-[#74201e]">*</span>
                   </label>
                   <input
                     type="text"
@@ -472,7 +466,7 @@ export function ApplyWorkflowContainer() {
 
                 <div>
                   <label className="block text-xs font-medium text-charcoal mb-1">
-                    Father's CNIC Number <span className="text-[#74201e]">*</span>
+                    Father&apos;s CNIC Number <span className="text-[#74201e]">*</span>
                   </label>
                   <input
                     type="text"
@@ -490,7 +484,7 @@ export function ApplyWorkflowContainer() {
 
                 <div>
                   <label className="block text-xs font-medium text-charcoal mb-1">
-                    Father's Mobile Number <span className="text-[#74201e]">*</span>
+                    Father&apos;s Mobile Number <span className="text-[#74201e]">*</span>
                   </label>
                   <input
                     type="tel"
@@ -756,7 +750,7 @@ export function ApplyWorkflowContainer() {
                     Calculated FSc Percentage:
                   </span>
                   <span className="font-heading text-base font-semibold text-[#74201e]">
-                    {formData.hsscPercentage ? `${formData.hsscPercentage}%` : "—"}
+                    {computedHsscPercentage ? `${computedHsscPercentage}%` : "—"}
                   </span>
                 </div>
               </div>
@@ -851,7 +845,7 @@ export function ApplyWorkflowContainer() {
                     SSC Percentage:
                   </span>
                   <span className="font-heading text-base font-semibold text-[#74201e]">
-                    {formData.sscPercentage ? `${formData.sscPercentage}%` : "—"}
+                    {computedSscPercentage ? `${computedSscPercentage}%` : "—"}
                   </span>
                 </div>
               </div>
@@ -1348,7 +1342,7 @@ export function ApplyWorkflowContainer() {
                     <span className="font-medium text-charcoal">{formData.applicantName || "—"}</span>
                   </div>
                   <div>
-                    <span className="text-gray-500 block text-[10px]">Father's Name:</span>
+                    <span className="text-gray-500 block text-[10px]">Father&apos;s Name:</span>
                     <span className="font-medium text-charcoal">{formData.fatherName || "—"}</span>
                   </div>
                   <div>
@@ -1404,7 +1398,7 @@ export function ApplyWorkflowContainer() {
                     <div className="space-y-1 text-gray-600">
                       <div>Discipline: <strong className="text-charcoal">{formData.hsscGroup}</strong></div>
                       <div>Board: {formData.hsscBoard} (Roll No: {formData.hsscRollNo})</div>
-                      <div>Marks: <strong className="text-[#74201e]">{formData.hsscObtainedMarks} / {formData.hsscTotalMarks}</strong> ({formData.hsscPercentage}%)</div>
+                      <div>Marks: <strong className="text-[#74201e]">{formData.hsscObtainedMarks} / {formData.hsscTotalMarks}</strong> ({computedHsscPercentage}%)</div>
                     </div>
                   </div>
 
@@ -1415,7 +1409,7 @@ export function ApplyWorkflowContainer() {
                     <div className="space-y-1 text-gray-600">
                       <div>Board: {formData.sscBoard} (Roll No: {formData.sscRollNo})</div>
                       <div>Passing Year: {formData.sscPassingYear}</div>
-                      <div>Marks: <strong className="text-[#74201e]">{formData.sscObtainedMarks} / {formData.sscTotalMarks}</strong> ({formData.sscPercentage}%)</div>
+                      <div>Marks: <strong className="text-[#74201e]">{formData.sscObtainedMarks} / {formData.sscTotalMarks}</strong> ({computedSscPercentage}%)</div>
                     </div>
                   </div>
                 </div>
@@ -1659,7 +1653,7 @@ export function ApplyWorkflowContainer() {
                 <div>
                   <span className="text-gray-500 block text-[10px]">FSc Board Marks:</span>
                   <span className="font-medium text-charcoal">
-                    {formData.hsscObtainedMarks} / {formData.hsscTotalMarks} ({formData.hsscPercentage}%)
+                    {formData.hsscObtainedMarks} / {formData.hsscTotalMarks} ({computedHsscPercentage}%)
                   </span>
                 </div>
                 <div>

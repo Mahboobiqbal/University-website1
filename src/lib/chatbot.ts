@@ -1,7 +1,4 @@
 import { GoogleGenAI } from "@google/genai";
-import { DEPARTMENTS } from "@/data/departments";
-import { FACULTIES } from "@/data/faculties";
-import { ROADMAPS } from "@/data/bahria-admissions";
 
 export interface ChatMessage {
   role: "user" | "assistant" | "system";
