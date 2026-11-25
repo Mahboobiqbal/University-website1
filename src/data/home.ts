@@ -32,28 +32,28 @@ export const RESEARCH = {
     {
       id: "oric",
       title: "Office of Research, Innovation and Commercialization (ORIC)",
-      image: "https://images.pexels.com/photos/669623/pexels-photo-669623.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/uos/academic-council.jpg",
       href: "https://uswat.edu.pk/oric-2/",
       external: true,
     },
     {
       id: "sujris",
       title: "Research Journals (SUJRIS)",
-      image: "https://images.pexels.com/photos/5946614/pexels-photo-5946614.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/uos/qec-seminar.jpg",
       href: "https://sujris.uswat.edu.pk/",
       external: true,
     },
     {
       id: "projects",
       title: "HEC Funded Research Projects",
-      image: "https://images.pexels.com/photos/3184285/pexels-photo-3184285.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/uos/campus-detail.jpg",
       href: "https://uswat.edu.pk/oric-2/",
       external: true,
     },
     {
       id: "qec",
       title: "Quality Enhancement Cell (QEC)",
-      image: "https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/uos/qec-seminar.jpg",
       href: "https://uswat.edu.pk/quality-enhancement-cell/",
       external: true,
     },
@@ -80,7 +80,7 @@ export const EVENTS = {
       month: "Nov",
       year: "2026",
       title: "International Conference: One Planet One Health; Nature, Climate & Humanity",
-      image: "https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/uos/qec-seminar.jpg",
       href: "/events/one-planet-one-health",
     },
     {
@@ -88,7 +88,7 @@ export const EVENTS = {
       month: "Nov",
       year: "2026",
       title: "Seminar on Anti Drug Awareness",
-      image: "https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/uos/seminar.jpg",
       href: "/events/seminar-anti-drug-awareness",
     },
     {
@@ -96,7 +96,7 @@ export const EVENTS = {
       month: "Nov",
       year: "2026",
       title: "University of Swat Joins Hands with NCHD for \"Each One Teach One\"",
-      image: "https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/uos/academic-council.jpg",
       href: "/events/each-one-teach-one",
     },
     {
@@ -104,7 +104,7 @@ export const EVENTS = {
       month: "Nov",
       year: "2026",
       title: "One-Day Seminar on \"Robot Trader: Algorithmic Trading for a Smarter Financial Future\"",
-      image: "https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/uos/campus-detail.jpg",
       href: "/events/robot-trader-seminar",
     },
     {
@@ -112,7 +112,7 @@ export const EVENTS = {
       month: "Nov",
       year: "2026",
       title: "MoU with Sri Lankan NIIBS on Gandhara Civilization",
-      image: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/uos/convocation.jpg",
       href: "/events/gandhara-civilization-mou",
     },
     {
@@ -120,7 +120,7 @@ export const EVENTS = {
       month: "Oct",
       year: "2026",
       title: "University of Swat Solarization Project Launch",
-      image: "https://images.pexels.com/photos/97799/pexels-photo-97799.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/uos/campus-main.jpg",
       href: "/events/solarization-project",
     },
   ],
@@ -136,7 +136,7 @@ export const NEWS = {
     month: "Nov 2026",
     excerpt:
       "The partnership is intended to create student volunteer, internship, leadership, and community-service opportunities.",
-    image: "https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/uos/academic-council.jpg",
     href: "/news/university-of-swat-signs-mou-with-helping-hand-for-relief-and-development-hhrd",
     officialHref:
       "https://uswat.edu.pk/2026/11/university-of-swat-signs-mou-with-helping-hand-for-relief-and-development-hhrd/",
@@ -148,7 +148,7 @@ export const NEWS = {
       month: "Nov 2026",
       excerpt:
         "At a student session at the University of Swat, the Higher Education Advisor spoke about persistence, curiosity, resilience, and collaboration.",
-      image: "https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/uos/convocation.jpg",
       href: "/news/sustained-effort-courage-and-honesty-are-essential-for-a-bright-future-dr-syed-aamer-abdullah",
       officialHref:
         "https://uswat.edu.pk/2026/11/sustained-effort-courage-and-honesty-are-essential-for-a-bright-future-dr-syed-aamer-abdullah/",
@@ -159,7 +159,7 @@ export const NEWS = {
       month: "Nov 2026",
       excerpt:
         "The announced agreement will establish a university-based digital preparation program with accessible online coaching and specialist lectures.",
-      image: "https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/uos/academic-council.jpg",
       href: "/news/university-of-swat-has-signed-a-mou-with-house-of-commons-academy-islamabad-to-establish-and-operate-a-dedicated-university-based-digital-civil-services-preparation-program",
       officialHref:
         "https://uswat.edu.pk/2026/11/university-of-swat-has-signed-a-mou-with-house-of-commons-academy-islamabad-to-establish-and-operate-a-dedicated-university-based-digital-civil-services-preparation-program/",
@@ -170,7 +170,7 @@ export const NEWS = {
       month: "Nov 2026",
       excerpt:
         "The Office of the Provost and District Youth Affairs, Swat, held an awareness seminar for students at the university's Theatre Hall.",
-      image: "https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/uos/seminar.jpg",
       href: "/news/seminar-on-anti-drug-awareness",
       officialHref: "https://uswat.edu.pk/2026/11/seminar-on-anti-drug-awareness/",
     },
@@ -180,7 +180,7 @@ export const NEWS = {
       month: "Nov 2026",
       excerpt:
         "The agreement with the National Commission for Human Development will involve university students in a literacy initiative.",
-      image: "https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg?auto=compress&cs=tinysrgb&w=800",
+      image: "/uos/campus-main.jpg",
       href: "/news/university-of-swat-joins-hands-with-nchd-for-each-one-teach-one",
       officialHref:
         "https://uswat.edu.pk/2026/11/university-of-swat-joins-hands-with-nchd-for-each-one-teach-one/",
@@ -195,9 +195,9 @@ export const LIFE = {
     "Our community embodies excellence and fosters the guiding values of leadership, innovation and discovery.",
   button: { label: "Discover more", href: "/campuses" },
   sliderImages: [
-    "https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "https://images.pexels.com/photos/1438072/pexels-photo-1438072.jpeg?auto=compress&cs=tinysrgb&w=800",
-    "https://images.pexels.com/photos/207729/pexels-photo-207729.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "/uos/campus-main.jpg",
+    "/uos/campus-detail.jpg",
+    "/uos/convocation.jpg",
   ],
   stats: [
     { label: "Students", value: "3000" },
@@ -252,12 +252,12 @@ export const ABOUT = {
 export const QUICK_ACCESS = {
   heading: "Quick Access",
   tiles: [
-    { label: "Administrative Offices", href: "https://uswat.edu.pk/maincampus/", external: true, image: "https://images.pexels.com/photos/207692/pexels-photo-207692.jpeg?auto=compress&cs=tinysrgb&w=800" },
-    { label: "Examinations", href: "http://exam.uswat.edu.pk/", external: true, image: "https://images.pexels.com/photos/159775/library-la-trobe-study-students-159775.jpeg?auto=compress&cs=tinysrgb&w=800" },
-    { label: "Quality Enhancement Cell", href: "https://uswat.edu.pk/quality-enhancement-cell/", external: true, image: "https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?auto=compress&cs=tinysrgb&w=800" },
-    { label: "ORIC", href: "https://uswat.edu.pk/oric-2/", external: true, image: "https://images.pexels.com/photos/669623/pexels-photo-669623.jpeg?auto=compress&cs=tinysrgb&w=800" },
-    { label: "Main Campus", href: "/campuses", image: "https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg?auto=compress&cs=tinysrgb&w=800" },
-    { label: "Women Campus", href: "/campuses", image: "https://images.pexels.com/photos/1438072/pexels-photo-1438072.jpeg?auto=compress&cs=tinysrgb&w=800" },
+    { label: "Administrative Offices", href: "https://uswat.edu.pk/maincampus/", external: true, image: "/uos/campus-main.jpg" },
+    { label: "Examinations", href: "http://exam.uswat.edu.pk/", external: true, image: "/uos/academic-council.jpg" },
+    { label: "Quality Enhancement Cell", href: "https://uswat.edu.pk/quality-enhancement-cell/", external: true, image: "/uos/qec-seminar.jpg" },
+    { label: "ORIC", href: "https://uswat.edu.pk/oric-2/", external: true, image: "/uos/academic-council.jpg" },
+    { label: "Main Campus", href: "/campuses", image: "/uos/campus-main.jpg" },
+    { label: "Women Campus", href: "/campuses", image: "/uos/campus-detail.jpg" },
   ],
 };
 
@@ -304,6 +304,7 @@ export const FOOTER = {
       heading: "Useful Links",
       links: [
         { label: "About University", href: "/about" },
+        { label: "University History", href: "/history" },
         { label: "Vice Chancellor's Message", href: "/vice-chancellor" },
         { label: "Academics", href: "/faculties" },
         { label: "Research", href: "/research" },
@@ -314,8 +315,9 @@ export const FOOTER = {
   ],
   copyright: "\u00a9 2026 All rights reserved to University of Swat.",
   legal: [
-    { label: "Report an Issue", href: "#" },
-    { label: "Cookies Policy", href: "#" },
-    { label: "Privacy Policy", href: "#" },
+    { label: "Submit a Complaint", href: "/complaints" },
+    { label: "Report an Issue", href: "/report-issue" },
+    { label: "Cookies Policy", href: "/cookies-policy" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
   ],
 };

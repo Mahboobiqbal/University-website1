@@ -55,6 +55,25 @@ export default function ContactPage() {
                 </a>
               ))}
             </div>
+
+            <Link
+              href="/complaints"
+              className="group mt-6 flex items-center justify-between gap-4 border border-[#e7e5df] bg-[#fafaf8] p-5 transition-colors hover:border-brand"
+            >
+              <span>
+                <span className="block text-sm font-medium text-charcoal transition-colors group-hover:text-brand">
+                  Have a complaint?
+                </span>
+                <span className="mt-1 block text-xs leading-relaxed text-gray-500">
+                  Choose the office you want to complain to and send a properly addressed email.
+                </span>
+              </span>
+              <ArrowUpRight
+                aria-hidden="true"
+                size={18}
+                className="shrink-0 text-brand transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+            </Link>
           </div>
           <aside className="flex flex-col justify-between bg-[#233623] p-8 text-white sm:p-10 lg:col-span-5 lg:p-12">
             <University aria-hidden="true" size={30} className="text-white/75" />

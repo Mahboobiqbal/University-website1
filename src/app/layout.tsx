@@ -21,13 +21,18 @@ const rubik = Rubik({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://uswat.edu.pk"
+  ),
   title: "University of Swat | Aspiring for Quality Education with Relevance",
   description:
     "University of Swat was established in 2010 with the aim to impart quality and relevant education. 22 teaching departments, 49 academic programs, 2 sub-campuses.",
   openGraph: {
     title: "University of Swat",
     description: "Aspiring for Quality Education with Relevance",
+    siteName: "University of Swat",
     type: "website",
+    locale: "en_US",
   },
 };
 
@@ -39,8 +44,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${roboto.variable} ${rubik.variable} h-full antialiased`}
     >
       <head>
-        <link rel="preconnect" href="https://images.pexels.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://images.pexels.com" />
+        <link rel="preconnect" href="https://uswat.edu.pk" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://uswat.edu.pk" />
       </head>
       <body className="min-h-full flex flex-col bg-white text-charcoal">
         <LanguageProvider>

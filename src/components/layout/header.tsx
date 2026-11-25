@@ -199,6 +199,14 @@ export const Header = () => {
     };
   }, [closeSearch, searchOpen]);
 
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setOpenMenu(null);
+    setLangOpen(false);
+    setUserOpen(false);
+  }
+
   const atHeroTop = isHome && !scrolled && !mobileOpen && !highContrast;
 
   const urduNavLabels: Record<string, string> = {
@@ -233,7 +241,7 @@ export const Header = () => {
         className={cn(
           "header-main fixed inset-x-0 top-0 z-50 transition-shadow duration-500 ease-out",
           atHeroTop ? "text-white" : "text-charcoal",
-          !atHeroTop && "shadow-lg"
+          !atHeroTop && !highContrast && "shadow-lg"
         )}
       >
         <div
@@ -529,6 +537,7 @@ export const Header = () => {
             content={navItems.find((item) => item.label === openMenu)?.mega}
             top={headerHeight}
             pathname={pathname}
+            onNavigate={() => setOpenMenu(null)}
           />
         )}
       </AnimatePresence>
@@ -664,8 +673,8 @@ export const Header = () => {
                               transition={{ duration: 0.22 }}
                               className="overflow-hidden"
                             >
-                              <div className="space-y-1 pb-3 pl-3 border-l border-gray-200">
-                                {links.slice(0, 12).map((link) => (
+                              <div className="nav-scroll max-h-[45vh] space-y-1 overflow-y-auto border-l border-gray-200 pb-3 pl-3 pr-2">
+                                {links.map((link) => (
                                   <Link
                                     key={link.label}
                                     href={link.href}
@@ -754,10 +763,12 @@ const MegaPanel = ({
   content,
   top,
   pathname = "",
+  onNavigate,
 }: {
   content?: MegaContent;
   top: number;
   pathname?: string | null;
+  onNavigate?: () => void;
 }) => {
   if (!content) return null;
   return (
@@ -770,12 +781,15 @@ const MegaPanel = ({
       style={{ top: top + 2 }}
       className="fixed left-1/2 -translate-x-1/2 z-40 w-[min(94vw,1280px)]"
     >
-      <div className="bg-white border border-gray-100 rounded-lg shadow-2xl overflow-hidden">
+      <div
+        className="nav-scroll overflow-y-auto rounded-lg border border-gray-100 bg-white shadow-2xl"
+        style={{ maxHeight: `calc(100vh - ${top + 20}px)` }}
+      >
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           {content.columns.map((col, i) => (
             <div key={i} className="p-5 lg:p-6 border-r border-gray-100">
               <h3
-                className="text-[11px] font-semibold uppercase tracking-wider mb-3 pb-2 border-b border-gray-100"
+                className="text-[13px] font-semibold uppercase tracking-[0.08em] mb-3 pb-2 border-b border-gray-100"
                 style={{ color: ACCENT }}
               >
                 {col.heading}
@@ -785,7 +799,8 @@ const MegaPanel = ({
                   <li key={j}>
                     <Link
                       href={link.href}
-                      className="block py-0.5 text-[13px] leading-snug text-gray-600 transition-colors"
+                      onClick={onNavigate}
+                      className="block py-0.5 text-[15px] leading-[1.45] text-gray-600 transition-colors"
                       style={pathname === link.href ? { color: ACCENT, fontWeight: 500 } : undefined}
                       onMouseEnter={(e) => { e.currentTarget.style.color = ACCENT; }}
                       onMouseLeave={(e) => {
@@ -802,7 +817,7 @@ const MegaPanel = ({
           {content.resources && (
             <div className="p-5 lg:p-6 border-r border-gray-100">
               <h3
-                className="text-[11px] font-semibold uppercase tracking-wider mb-3 pb-2 border-b border-gray-100"
+                className="text-[13px] font-semibold uppercase tracking-[0.08em] mb-3 pb-2 border-b border-gray-100"
                 style={{ color: ACCENT }}
               >
                 {content.resources.heading}
@@ -812,7 +827,8 @@ const MegaPanel = ({
                   <li key={j}>
                     <Link
                       href={link.href}
-                      className="block py-0.5 text-[13px] leading-snug text-gray-600 transition-colors"
+                      onClick={onNavigate}
+                      className="block py-0.5 text-[15px] leading-[1.45] text-gray-600 transition-colors"
                       style={pathname === link.href ? { color: ACCENT, fontWeight: 500 } : undefined}
                       onMouseEnter={(e) => { e.currentTarget.style.color = ACCENT; }}
                       onMouseLeave={(e) => {
@@ -835,10 +851,11 @@ const MegaPanel = ({
               className="w-full h-32 object-cover rounded-md mb-3"
               loading="lazy"
             />
-            <h3 className="text-sm font-medium text-charcoal mb-1.5">{content.promo.title}</h3>
-            <p className="text-xs text-gray-500 mb-3 leading-relaxed">{content.promo.text}</p>
+            <h3 className="text-[16px] font-medium text-charcoal mb-1.5">{content.promo.title}</h3>
+            <p className="text-[14px] text-gray-500 mb-3 leading-relaxed">{content.promo.text}</p>
             <Link
               href={content.promo.href}
+              onClick={onNavigate}
               className="inline-flex items-center gap-1 text-xs font-medium transition-colors"
               style={{ color: ACCENT }}
             >
