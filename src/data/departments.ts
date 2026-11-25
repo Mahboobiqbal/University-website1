@@ -51,11 +51,54 @@ const facultyByDept: Record<string, string> = {
   hunerkada: "Hunerkada (Centre of Excellence for Art & Culture)",
 };
 
+const localFacultyImage = (image: string | undefined): string => {
+  if (!image?.startsWith("https://uswat.edu.pk/wp-content/uploads/")) return image || "";
+
+  const filename = image.split("/").pop();
+  if (!filename) return image;
+
+  // These portraits are unavailable from the source website and will use
+  // the existing graceful profile placeholder instead.
+  const unavailable = new Set([
+    "1-1.jpg",
+    "FAZAL-AKBAR-PIC-150x150.jpeg",
+    "KK-Copy-removebg-preview-e1759735025336-150x150.png",
+    "Latest-Photo-of-Dr.-Muhammad-Noman-Assistant-Professor-e1759398022634-150x150-removebg-preview.png",
+    "Mr.-Sanaullah-removebg-preview-e1759734860756-150x150.png",
+    "Photo-150x150.jpg",
+    "SADIQ-150x150-removebg-preview.png",
+    "WhatsApp_Image_2025-10-02_at_10.32.12-removebg-preview-150x150.png",
+    "amjadhilal-e1759136720703-removebg-preview-150x150.png",
+    "dr_muhammad_adil-150x150.jpg",
+    "eng-o1-150x150.png",
+    "lutfullah-removebg-preview.png",
+    "shujaat-ali-118x150-removebg-preview.png",
+    "ubaid-150x150-removebg-preview.png",
+    "wajid-Rashid-removebg-preview-e1759734976721-150x150.png",
+    "zakir-150x150-removebg-preview.png",
+    "WhatsApp-Image-2025-11-24-at-14.28.36-150x150.jpeg",
+    "Screenshot-3-e1767949243305-150x150.png",
+    "Subhan-Ullah-Passport-size-pic--150x150.jpeg",
+    "zahid-bot-150x150.png",
+    "Dr-Muhammad-Ayaz-Picture-150x150.jpg",
+    "Dr.-Ihsan_Chem-150x150.jpeg",
+    "WhatsApp-Image-2026-10-15-at-15.38.32-150x150.jpeg",
+    "WhatsApp-Image-2026-11-11-at-14.48.51-150x150.jpeg",
+    "env001.png",
+  ]);
+
+  return unavailable.has(filename) ? "" : `/faculty/${filename}`;
+};
+
 export const DEPARTMENTS: Department[] = ALL_DETAILS.map((dept) => ({
   ...dept,
+  facultyMembers: dept.facultyMembers.map((member) => ({
+    ...member,
+    image: localFacultyImage(member.image),
+  })),
   image:
     imageMap[dept.id] ||
-    "https://images.pexels.com/photos/3754756/pexels-photo-3754756.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "/uos/campus-main.jpg",
   faculty: facultyByDept[dept.id] || "",
   href: `/department/${dept.id}`,
 }));
