@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowUpRight, Mail, MapPin, FileText, ArrowLeft } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, FileText, ArrowLeft, Wallet, Info } from "lucide-react";
 import { InnerPageLayout } from "@/components/layout/inner-page-layout";
 import { DEPARTMENTS, getDepartmentById, slugifyFacultyName, slugifyProgramName } from "@/data/departments";
+import { getDepartmentFees, formatFee } from "@/data/department-fees";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -26,6 +27,8 @@ export default async function DepartmentPage({ params }: Props) {
   const { slug } = await params;
   const dept = getDepartmentById(slug);
   if (!dept) notFound();
+
+  const fees = getDepartmentFees(dept.id, dept.programs);
 
   return (
     <InnerPageLayout>
@@ -99,6 +102,83 @@ export default async function DepartmentPage({ params }: Props) {
                     </span>
                   </Link>
                 ))}
+              </div>
+            </section>
+          )}
+
+          {fees.programs.length > 0 && (
+            <section id="fee-structure" className="mb-10 scroll-mt-32">
+              <h2 className="text-xl font-semibold text-charcoal mb-4 top-line">Fee Structure</h2>
+              <div className="rounded-none border border-[#e7e5df] border-t-2 border-t-[#74201e] bg-[#fafaf8] overflow-hidden">
+                <div className="flex items-start gap-3 px-4 py-4 border-b border-[#e7e5df] bg-white sm:px-5">
+                  <Wallet className="w-4 h-4 text-brand shrink-0 mt-0.5" aria-hidden="true" />
+                  <div>
+                    <p className="text-sm font-medium text-charcoal">
+                      Tuition &amp; dues for {dept.name.replace(/^Department of |^Faculty of /, "")}
+                    </p>
+                    <p className="mt-1 flex items-start gap-1.5 text-xs text-gray-500 leading-relaxed">
+                      <Info className="w-3.5 h-3.5 shrink-0 mt-0.5" aria-hidden="true" />
+                      {fees.note}
+                    </p>
+                  </div>
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-sm">
+                    <thead className="bg-white text-xs uppercase tracking-wide text-gray-600">
+                      <tr>
+                        <th scope="col" className="px-4 py-3 font-semibold sm:px-5">Program</th>
+                        <th scope="col" className="px-4 py-3 font-semibold sm:px-5">Level</th>
+                        <th scope="col" className="px-4 py-3 font-semibold text-right sm:px-5">Admission Fee</th>
+                        <th scope="col" className="px-4 py-3 font-semibold text-right sm:px-5">Per Semester</th>
+                        <th scope="col" className="px-4 py-3 font-semibold text-right sm:px-5">Annual Fee</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[#e7e5df] bg-white">
+                      {fees.programs.map((fee) => (
+                        <tr key={`${fee.program}-${fee.level}`} className="hover:bg-[#fafaf8] transition-colors">
+                          <td className="px-4 py-3.5 text-charcoal font-medium sm:px-5">
+                            {fee.program}
+                          </td>
+                          <td className="px-4 py-3.5 sm:px-5">
+                            <span className="inline-block border border-brand/20 bg-brand/5 px-2 py-0.5 text-xs text-brand">
+                              {fee.level}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3.5 text-right text-gray-600 whitespace-nowrap sm:px-5">
+                            {formatFee(fee.admissionFee)}
+                          </td>
+                          <td className="px-4 py-3.5 text-right text-gray-600 whitespace-nowrap sm:px-5">
+                            {formatFee(fee.perSemesterFee)}
+                          </td>
+                          <td className="px-4 py-3.5 text-right font-semibold text-charcoal whitespace-nowrap sm:px-5">
+                            {formatFee(fee.annualFee)}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#e7e5df] bg-white px-4 py-4 sm:px-5">
+                  <p className="text-xs text-gray-500 max-w-md leading-relaxed">
+                    One-time admission fee is payable at enrolment. Semester dues are charged twice a year.
+                  </p>
+                  <div className="flex flex-wrap gap-3 text-xs font-medium">
+                    <a
+                      href="https://uswat.edu.pk/fee-structure/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-brand hover:text-brand-hover"
+                    >
+                      Official fee page <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                    <a
+                      href="mailto:admissions@uswat.edu.pk"
+                      className="inline-flex items-center gap-1.5 text-brand hover:text-brand-hover"
+                    >
+                      Ask Admissions
+                    </a>
+                  </div>
+                </div>
               </div>
             </section>
           )}

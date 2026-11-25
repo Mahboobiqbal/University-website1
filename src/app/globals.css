@@ -51,51 +51,334 @@
     background: #74201e;
     color: #ffffff;
   }
+}
 
-  .high-contrast {
-    --background: #000000;
-    --foreground: #ffffff;
-    --brand: #ffffff;
-    --charcoal: #ffffff;
+/* Must sit outside @layer base so it beats unlayered :root vars */
+:root.high-contrast {
+  color-scheme: dark;
+  --background: #0d1210;
+  --foreground: #f2f4f2;
+  --brand: #f0a8a6;
+  --brand-hover: #b9d2bd;
+  --charcoal: #f2f4f2;
+  --charcoal-hover: #e4e8e4;
+  --university-green: #2d4a32;
+}
+
+@layer base {
+  .high-contrast body {
+    background: var(--background);
+    color: var(--foreground);
   }
 
-  .high-contrast body {
-    background: #000000;
+  .high-contrast ::selection {
+    background: #a63c3a;
     color: #ffffff;
   }
 
-  .high-contrast .border-gray-100 {
-    border-color: #ffffff;
-  }
-
-  .high-contrast .text-gray-500,
-  .high-contrast .text-gray-600,
-  .high-contrast .text-gray-400,
-  .high-contrast .text-gray-300 {
-    color: #ffffff !important;
-  }
-
+  /* Surfaces */
   .high-contrast .bg-white,
-  .high-contrast .bg-white\/95 {
-    background: #000000 !important;
+  .high-contrast .bg-white\/95,
+  .high-contrast .bg-\[\#fcfcfb\],
+  .high-contrast .bg-\[\#fafaf8\],
+  .high-contrast .bg-\[\#fafbf9\],
+  .high-contrast .bg-\[\#f7f7f5\],
+  .high-contrast .bg-\[\#f7f8f6\],
+  .high-contrast .bg-\[\#f7f8fa\],
+  .high-contrast .bg-\[\#fbfcfa\],
+  .high-contrast .bg-\[\#eef3ee\],
+  .high-contrast .bg-\[\#e8efe9\],
+  .high-contrast .odd\:bg-white:nth-child(odd),
+  .high-contrast .even\:bg-\[\#fafbf9\]:nth-child(even) {
+    background-color: #141b18 !important;
   }
 
+  .high-contrast .bg-gray-50,
+  .high-contrast .bg-gray-50\/75,
   .high-contrast .bg-gray-100,
-  .high-contrast .bg-gray-50 {
-    background: #111111 !important;
+  .high-contrast .bg-gray-200,
+  .high-contrast .bg-gray-50\/75 {
+    background-color: #1a221f !important;
   }
 
   .high-contrast .bg-gray-800\/50 {
-    background: rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(255, 255, 255, 0.08) !important;
   }
 
-  .high-contrast .border-gray-700,
-  .high-contrast .border-gray-600 {
-    border-color: #ffffff !important;
+  /* Keep intentionally dark brand surfaces dark */
+  .high-contrast .bg-charcoal,
+  .high-contrast .bg-\[\#17231d\],
+  .high-contrast .bg-\[\#233623\] {
+    background-color: #101814 !important;
   }
 
-  .high-contrast .text-white\/95 {
+  /* Light CTAs that sit on dark brand bands must stay light */
+  .high-contrast footer .bg-white.text-\[\#233623\],
+  .high-contrast .bg-white.text-\[\#233623\] {
+    background-color: #f2f4f2 !important;
+    color: #0d1210 !important;
+  }
+
+  .high-contrast .bg-brand {
+    background-color: #a63c3a !important;
+  }
+
+  .high-contrast .hover\:bg-brand:hover,
+  .high-contrast .hover\:bg-brand-hover:hover {
+    background-color: #8f3330 !important;
+  }
+
+  .high-contrast .hover\:bg-charcoal:hover,
+  .high-contrast .hover\:bg-charcoal-hover:hover {
+    background-color: #1e2a24 !important;
+  }
+
+  /* Soft accent chips → dark equivalents */
+  .high-contrast .bg-emerald-50,
+  .high-contrast .bg-emerald-50\/70,
+  .high-contrast .bg-emerald-100,
+  .high-contrast .bg-emerald-100\/70,
+  .high-contrast .bg-amber-50,
+  .high-contrast .bg-amber-50\/70,
+  .high-contrast .bg-blue-50,
+  .high-contrast .bg-purple-50 {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border-color: rgba(255, 255, 255, 0.14) !important;
+  }
+
+  .high-contrast .hover\:bg-\[\#fafaf8\]:hover,
+  .high-contrast .hover\:bg-\[\#f7f8f6\]:hover,
+  .high-contrast .hover\:bg-\[\#e8efe9\]:hover,
+  .high-contrast .hover\:bg-\[\#eef3ee\]:hover,
+  .high-contrast .hover\:bg-gray-50:hover,
+  .high-contrast .hover\:bg-gray-50\/75:hover,
+  .high-contrast .hover\:bg-gray-100:hover,
+  .high-contrast .hover\:bg-\[\#f7f8f6\]:hover {
+    background-color: #1c2522 !important;
+  }
+
+  /* Light hover invert (hero/footer CTAs sit on dark sections) */
+  .high-contrast .hover\:bg-white:hover,
+  .high-contrast .hover\:bg-white\/85:hover {
+    background-color: #f2f4f2 !important;
+  }
+
+  .high-contrast .hover\:bg-white:hover.hover\:text-charcoal,
+  .high-contrast .hover\:bg-white\/85:hover.hover\:text-\[\#233623\],
+  .high-contrast .hover\:bg-white:hover.hover\:text-\[\#233623\] {
+    color: #0d1210 !important;
+  }
+
+  .high-contrast .hover\:bg-white\/20:hover,
+  .high-contrast .hover\:bg-white\/15:hover,
+  .high-contrast .hover\:bg-white\/12:hover,
+  .high-contrast .hover\:bg-white\/10:hover {
+    background-color: rgba(255, 255, 255, 0.16) !important;
+  }
+
+  .high-contrast .hover\:bg-\[\#74201e\]:hover,
+  .high-contrast .hover\:bg-\[\#5e1917\]:hover,
+  .high-contrast .hover\:bg-\[\#5d1a18\]:hover {
+    background-color: #c73e3c !important;
+  }
+
+  /* Chat message stream gradient */
+  .high-contrast .bg-gradient-to-b.from-white.to-\[\#fafaf8\] {
+    background: #141b18 !important;
+  }
+
+  /* Text */
+  .high-contrast .text-charcoal,
+  .high-contrast .hover\:text-charcoal:hover,
+  .high-contrast .group:hover .group-hover\:text-charcoal {
+    color: var(--foreground) !important;
+  }
+
+  .high-contrast .text-gray-300,
+  .high-contrast .text-gray-400,
+  .high-contrast .text-gray-500,
+  .high-contrast .text-gray-600,
+  .high-contrast .text-gray-700,
+  .high-contrast .text-gray-800,
+  .high-contrast .placeholder\:text-gray-400::placeholder {
+    color: #b5beb7 !important;
+  }
+
+  .high-contrast .text-\[\#212529\],
+  .high-contrast .text-\[\#17231d\] {
+    color: #e8ecea !important;
+  }
+
+  .high-contrast .text-\[\#233623\],
+  .high-contrast .hover\:text-\[\#233623\]:hover,
+  .high-contrast .group:hover .group-hover\:text-\[\#233623\] {
+    color: #9fd4a8 !important;
+  }
+
+  .high-contrast .text-\[\#74201e\],
+  .high-contrast .hover\:text-\[\#74201e\]:hover {
+    color: #f0a8a6 !important;
+  }
+
+  .high-contrast .group:hover .group-hover\:text-brand {
+    color: var(--brand) !important;
+  }
+
+  .high-contrast .text-\[\#b9d2bd\],
+  .high-contrast .text-emerald-300 {
+    color: #b9d2bd !important;
+  }
+
+  .high-contrast .text-emerald-600,
+  .high-contrast .text-emerald-700,
+  .high-contrast .text-emerald-800,
+  .high-contrast .text-emerald-900,
+  .high-contrast .text-emerald-950 {
+    color: #9fd4b0 !important;
+  }
+
+  .high-contrast .text-amber-800,
+  .high-contrast .text-amber-900,
+  .high-contrast .text-amber-950 {
+    color: #f0c98a !important;
+  }
+
+  .high-contrast .text-blue-800 {
+    color: #9ec5f0 !important;
+  }
+
+  .high-contrast .text-purple-800 {
+    color: #d0b4f0 !important;
+  }
+
+  /* Brand text (links / accents) */
+  .high-contrast .text-brand,
+  .high-contrast .hover\:text-brand:hover,
+  .high-contrast .group:hover .group-hover\:text-brand {
+    color: var(--brand) !important;
+  }
+
+  .high-contrast .hover\:text-brand-hover:hover {
+    color: var(--brand-hover) !important;
+  }
+
+  /* Keep white button labels readable when surface stays light */
+  .high-contrast .bg-\[\#b9d2bd\].text-\[\#17231d\] {
+    color: #0d1210 !important;
+  }
+
+  .high-contrast .text-white {
     color: #ffffff !important;
+  }
+
+  /* Borders */
+  .high-contrast .border-gray-100,
+  .high-contrast .border-gray-200,
+  .high-contrast .border-gray-300,
+  .high-contrast .border-\[\#e7e5df\],
+  .high-contrast .border-\[\#cddace\],
+  .high-contrast .border-\[\#7fa587\] {
+    border-color: rgba(255, 255, 255, 0.14) !important;
+  }
+
+  .high-contrast .border-charcoal {
+    border-color: rgba(255, 255, 255, 0.35) !important;
+  }
+
+  .high-contrast .border-brand {
+    border-color: var(--brand) !important;
+  }
+
+  .high-contrast .hover\:border-brand:hover,
+  .high-contrast .hover\:border-\[\#74201e\]:hover,
+  .high-contrast .hover\:border-\[\#233623\]:hover,
+  .high-contrast .group:hover .group-hover\:border-\[\#233623\] {
+    border-color: var(--brand) !important;
+  }
+
+  .high-contrast .border-t-\[\#74201e\],
+  .high-contrast .border-t-2 {
+    border-top-color: var(--brand) !important;
+  }
+
+  .high-contrast .border-l-\[\#74201e\],
+  .high-contrast .border-l-2,
+  .high-contrast .border-l-4 {
+    border-left-color: var(--brand) !important;
+  }
+
+  .high-contrast .border-b-white\/55,
+  .high-contrast .border-r-white\/55 {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  /* Group hover fills */
+  .high-contrast .group:hover .group-hover\:bg-\[\#233623\],
+  .high-contrast .group:hover .group-hover\:bg-brand {
+    background-color: #2d4a32 !important;
+  }
+
+  .high-contrast .group:hover .group-hover\:text-white {
+    color: #ffffff !important;
+  }
+
+  /* Header solid bar when not over hero */
+  .high-contrast .header-main .bg-white.transition-opacity {
+    background-color: #101814 !important;
+  }
+
+  .high-contrast .header-main {
+    color: var(--foreground);
+    box-shadow: none !important;
+  }
+
+  /* Inputs */
+  .high-contrast input:not([type="checkbox"]):not([type="radio"]),
+  .high-contrast select,
+  .high-contrast textarea {
+    color: var(--foreground);
+    background-color: #1a221f;
+    border-color: rgba(255, 255, 255, 0.16);
+  }
+
+  .high-contrast input::placeholder,
+  .high-contrast textarea::placeholder {
+    color: #8b968e;
+  }
+
+  .high-contrast .focus\:bg-white:focus {
+    background-color: #1a221f !important;
+  }
+
+  .high-contrast .focus\:border-\[\#74201e\]:focus,
+  .high-contrast .focus\:border-brand:focus {
+    border-color: var(--brand) !important;
+  }
+
+  /* Tables */
+  .high-contrast table {
+    color: var(--foreground);
+  }
+
+  .high-contrast thead.bg-\[\#f7f7f5\],
+  .high-contrast .bg-\[\#f7f7f5\] {
+    background-color: #1a221f !important;
+  }
+
+  .high-contrast tr.hover\:bg-\[\#fafaf8\]:hover,
+  .high-contrast tr.hover\:bg-gray-50\/75:hover,
+  .high-contrast tr:hover {
+    background-color: #1c2522 !important;
+  }
+
+  /* Soft shadows read better as subtle borders on dark */
+  .high-contrast .shadow-xs,
+  .high-contrast .shadow-sm,
+  .high-contrast .shadow-md,
+  .high-contrast .shadow-lg,
+  .high-contrast .shadow-xl,
+  .high-contrast .shadow-2xl {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06) !important;
   }
 }
 

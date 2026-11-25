@@ -233,7 +233,7 @@ export const Header = () => {
         className={cn(
           "header-main fixed inset-x-0 top-0 z-50 transition-shadow duration-500 ease-out",
           atHeroTop ? "text-white" : "text-charcoal",
-          !atHeroTop && "shadow-lg"
+          !atHeroTop && !highContrast && "shadow-lg"
         )}
       >
         <div
