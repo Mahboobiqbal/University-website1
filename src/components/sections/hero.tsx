@@ -89,8 +89,8 @@ export const Hero = () => {
             )}
           </motion.div>
         </AnimatePresence>
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/90 via-charcoal/65 sm:via-charcoal/45 to-charcoal/30 sm:to-charcoal/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-charcoal/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/45 via-charcoal/20 to-charcoal/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-charcoal/10 to-charcoal/10" />
       </div>
 
       {/* Main Content Area */}
@@ -108,7 +108,7 @@ export const Hero = () => {
             </span>
           </motion.div>
           <h1
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[86px] font-light text-white text-balance leading-[1.06] sm:leading-[1.04] mb-4 sm:mb-6 tracking-tight drop-shadow-[0_2px_18px_rgba(0,0,0,0.35)]"
+            className="text-[38px] sm:text-[48px] md:text-[56px] lg:text-[64px] xl:text-[72px] font-semibold text-white text-balance leading-[1.08] sm:leading-[1.06] mb-4 sm:mb-6 tracking-[-0.03em]"
           >
             {language === "ur" ? "معیار کی تعلیم، وابستگی کے ساتھ" : HERO.headline}
           </h1>

@@ -81,6 +81,12 @@ const pages = [
     description: "University contacts and Main Campus location.",
     category: "University",
   },
+  {
+    title: "Submit a Complaint",
+    href: "/complaints",
+    description: "Submit a complaint to the relevant University of Swat office.",
+    category: "Student Support",
+  },
 ];
 
 export default async function SearchPage({ searchParams }: SearchPageProps) {

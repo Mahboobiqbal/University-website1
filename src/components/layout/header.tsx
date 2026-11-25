@@ -20,6 +20,9 @@ import {
 import { cn } from "@/lib/utils";
 import { NAVIGATION } from "@/data/navigation";
 import { IMAGES } from "@/data/images";
+import { DEPARTMENTS, getAllPrograms } from "@/data/departments";
+import { FACULTIES } from "@/data/faculties";
+import { NEWS } from "@/data/home";
 import { useLanguage } from "@/components/providers/language-provider";
 
 const ACCENT = "#74201e";
@@ -40,6 +43,12 @@ interface MegaContent {
 
 type NavItem = { label: string; href: string; mega?: MegaContent };
 
+type SearchSuggestion = {
+  title: string;
+  href: string;
+  category: string;
+};
+
 function UniversityWordmark({ drawer = false, dark = false }: { drawer?: boolean; dark?: boolean }) {
   return (
     <span
@@ -50,12 +59,12 @@ function UniversityWordmark({ drawer = false, dark = false }: { drawer?: boolean
       )}
     >
       <span
-        lang="ur"
+        lang="ps"
         dir="rtl"
         className="block whitespace-nowrap text-center text-[15px] font-bold leading-[1.2] sm:text-[16px] xl:text-[17px]"
         style={{ fontFamily: '"Noto Nastaliq Urdu", "Nirmala UI", serif' }}
       >
-        یونیورسٹی آف سوات
+        د سوات پوهنتون
       </span>
       <span
         dir="ltr"
@@ -118,6 +127,59 @@ export const Header = () => {
   const [highContrast, setHighContrast] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(143);
   const headerRef = useRef<HTMLElement>(null);
+
+  const searchSuggestions = React.useMemo<SearchSuggestion[]>(() => {
+    const query = searchQuery.trim().toLocaleLowerCase();
+    if (!query) return [];
+
+    const pageSuggestions: SearchSuggestion[] = [
+      { title: "About the University", href: "/about", category: "University" },
+      { title: "Admissions", href: "/admissions", category: "Admissions" },
+      { title: "Campuses", href: "/campuses", category: "University" },
+      { title: "Academic Programs", href: "/programs", category: "Academics" },
+      { title: "Faculties and Departments", href: "/faculties", category: "Academics" },
+      { title: "Research and Innovation", href: "/research", category: "Research" },
+      { title: "University Events", href: "/events", category: "Campus life" },
+      { title: "Newsroom", href: "/news", category: "News" },
+      { title: "Central Library", href: "/library", category: "Resources" },
+      { title: "Downloads", href: "/downloads", category: "Resources" },
+      { title: "Contact", href: "/contact", category: "University" },
+      { title: "Submit a Complaint", href: "/complaints", category: "Student Support" },
+      { title: "Administration", href: "/administration", category: "University" },
+    ];
+
+    const suggestions: SearchSuggestion[] = [
+      ...DEPARTMENTS.map((department) => ({
+        title: department.name,
+        href: department.href,
+        category: "Department",
+      })),
+      ...getAllPrograms().map((program) => ({
+        title: program.name,
+        href: program.href,
+        category: "Program",
+      })),
+      ...FACULTIES.map((faculty) => ({
+        title: faculty.name,
+        href: "/faculties",
+        category: "Faculty",
+      })),
+      ...[NEWS.featured, ...NEWS.list].map((article) => ({
+        title: article.title,
+        href: article.href,
+        category: "News",
+      })),
+      ...pageSuggestions,
+    ];
+
+    return suggestions
+      .filter((item) => item.title.toLocaleLowerCase().includes(query))
+      .filter(
+        (item, index, items) =>
+          items.findIndex((candidate) => candidate.href === item.href && candidate.title === item.title) === index
+      )
+      .slice(0, 8);
+  }, [searchQuery]);
 
   const restoreSearchFocus = React.useCallback(() => {
     const stored = searchTriggerRef.current;
@@ -267,7 +329,7 @@ export const Header = () => {
           >
             <Link
               href="/"
-              className="flex items-center gap-3 py-3"
+              className="flex items-center gap-0 py-3"
               aria-label="University of Swat home"
             >
               <span className="relative block h-11 w-11 shrink-0 sm:h-12 sm:w-12 xl:h-[76px] xl:w-[76px]">
@@ -582,6 +644,9 @@ export const Header = () => {
                   placeholder="What are you looking for?"
                   autoComplete="off"
                   autoFocus
+                  aria-autocomplete="list"
+                  aria-expanded={searchSuggestions.length > 0}
+                  aria-controls="header-search-suggestions"
                   className="min-w-0 flex-1 bg-transparent text-2xl font-light text-white placeholder-white/40 outline-none lg:text-4xl"
                 />
                 <button
@@ -595,6 +660,38 @@ export const Header = () => {
               <p className="mt-4 max-w-3xl text-sm text-white/50">
                 Press Enter to search departments, programs, news, and pages.
               </p>
+              {searchSuggestions.length > 0 && (
+                <div
+                  id="header-search-suggestions"
+                  role="listbox"
+                  aria-label="Search suggestions"
+                  className="mt-6 max-w-3xl border-t border-white/15"
+                >
+                  {searchSuggestions.map((suggestion) => (
+                    <Link
+                      key={`${suggestion.category}-${suggestion.href}-${suggestion.title}`}
+                      href={suggestion.href}
+                      role="option"
+                      onClick={() => setSearchOpen(false)}
+                      className="group flex items-center justify-between gap-5 border-b border-white/15 py-3.5 text-white"
+                    >
+                      <span className="min-w-0">
+                        <span className="mb-1 block text-[10px] font-semibold uppercase tracking-[0.18em] text-white/50">
+                          {suggestion.category}
+                        </span>
+                        <span className="block truncate text-base font-light group-hover:text-[#d79a97] lg:text-lg">
+                          {suggestion.title}
+                        </span>
+                      </span>
+                      <ArrowRight
+                        aria-hidden="true"
+                        size={18}
+                        className="shrink-0 text-white/50 transition-transform group-hover:translate-x-1 group-hover:text-white"
+                      />
+                    </Link>
+                  ))}
+                </div>
+              )}
             </form>
           </motion.div>
         )}

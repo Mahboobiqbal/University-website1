@@ -198,14 +198,15 @@ export const NAVIGATION = {
               { label: "Sports", href: "/administration/sports" },
               { label: "Planning & Development", href: "/administration/planning-development" },
               { label: "Works", href: "/administration/works" },
-              { label: "Administration", href: "/administration" },
+              { label: "Administration", href: "/administration/directorate-of-administration" },
+              { label: "Research & Technological Development", href: "/administration/directorate-of-research-technological-development" },
             ],
           },
           {
             heading: "Units & Boards",
             links: [
               { label: "Alumni Association (UOSAA)", href: "/alumni" },
-              { label: "Central Library", href: "/library" },
+              { label: "Central Library", href: "/administration/central-library" },
             { label: "Find an Expert", href: "/experts" },
             { label: "Laboratories", href: "/laboratories" },
             { label: "Decision Desk", href: "/decision-desk" },

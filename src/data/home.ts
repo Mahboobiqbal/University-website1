@@ -1,5 +1,5 @@
 export const HERO = {
-  headline: "Aspiring for Quality Education with Relevance",
+  headline: "Rooted in Swat. Ready for the World.",
   subtext:
     "Founded in 2010, the University of Swat serves the Swat Valley and wider region through teaching, research, and community engagement.",
   learnMore: "Learn More",

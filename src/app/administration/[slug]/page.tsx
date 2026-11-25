@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Mail, Phone } from "lucide-react";
@@ -59,6 +60,58 @@ export default async function AdministrationEntryPage({ params }: Props) {
 
           <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_320px]">
             <section className="border-t-2 border-brand pt-5">
+              {entry.officer && (
+                <div className="mb-8 flex items-center gap-5 border-b border-gray-200 pb-8">
+                  <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-full bg-gray-100">
+                    <Image
+                      src={entry.officer.image}
+                      alt={entry.officer.name}
+                      fill
+                      sizes="128px"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brand">
+                      Administrative Officer
+                    </p>
+                    <h2 className="mt-1 text-2xl font-medium text-charcoal">
+                      {entry.officer.name}
+                    </h2>
+                    <p className="mt-1 text-sm text-gray-600">{entry.officer.title}</p>
+                    {entry.officer.email && (
+                      <a
+                        href={`mailto:${entry.officer.email}`}
+                        className="mt-2 inline-block text-sm text-brand hover:underline"
+                      >
+                        {entry.officer.email}
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {entry.message && (
+                <div className="mb-8 border-l-4 border-brand bg-[#f7f7f5] px-6 py-5">
+                  <h2 className="mb-3 text-xl font-medium text-charcoal">
+                    Message to Students
+                  </h2>
+                  {entry.message.map((paragraph) => (
+                    <p
+                      key={paragraph}
+                      className="mb-3 last:mb-0 text-sm leading-7 text-gray-700"
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+                  {entry.officer && (
+                    <p className="mt-4 text-sm font-medium text-charcoal">
+                      {entry.officer.name}, {entry.officer.title}
+                    </p>
+                  )}
+                </div>
+              )}
+
               <h2 className="mb-4 text-xl font-medium text-charcoal">
                 Responsibilities
               </h2>
@@ -76,6 +129,22 @@ export default async function AdministrationEntryPage({ params }: Props) {
                   </li>
                 ))}
               </ul>
+
+              {entry.staff && (
+                <section className="mt-8 border-t border-gray-200 pt-6">
+                  <h2 className="mb-4 text-xl font-medium text-charcoal">Staff</h2>
+                  <ul className="grid gap-2 sm:grid-cols-2">
+                    {entry.staff.map((person) => (
+                      <li
+                        key={person}
+                        className="border-l-2 border-brand/40 py-1 pl-3 text-sm text-gray-700"
+                      >
+                        {person}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
             </section>
 
             <aside className="h-fit border border-gray-200 bg-[#f7f7f5] p-6">
@@ -83,18 +152,18 @@ export default async function AdministrationEntryPage({ params }: Props) {
                 Contact
               </h2>
               <a
-                href="mailto:info@uswat.edu.pk"
+                href={`mailto:${entry.contact?.email ?? "info@uswat.edu.pk"}`}
                 className="flex gap-3 border-b border-gray-200 pb-4 text-sm text-gray-700 transition-colors hover:text-brand"
               >
                 <Mail aria-hidden="true" size={16} className="mt-0.5 shrink-0 text-brand" />
-                <span className="break-all">info@uswat.edu.pk</span>
+                <span className="break-all">{entry.contact?.email ?? "info@uswat.edu.pk"}</span>
               </a>
               <a
-                href="tel:+92946949114"
+                href={`tel:${(entry.contact?.phone ?? "+92946949114").replace(/[^+\d]/g, "")}`}
                 className="flex gap-3 py-4 text-sm text-gray-700 transition-colors hover:text-brand"
               >
                 <Phone aria-hidden="true" size={16} className="mt-0.5 shrink-0 text-brand" />
-                <span>+92 946-949114–18</span>
+                <span>{entry.contact?.phone ?? "+92 946-949114–18"}</span>
               </a>
               <p className="border-t border-gray-200 pt-4 text-xs leading-relaxed text-gray-500">
                 University of Swat, UoSm Campus, Main G.T. Road, Swat,

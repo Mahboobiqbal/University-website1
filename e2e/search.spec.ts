@@ -23,3 +23,11 @@ test("submit button also performs a search", async ({ page }) => {
 
   await expect(page).toHaveURL(/\/search\?q=library/);
 });
+
+test("complaint is included in search results", async ({ page }) => {
+  await page.goto("/search?q=complaint");
+
+  await expect(
+    page.getByRole("link", { name: /Submit a Complaint/ })
+  ).toHaveAttribute("href", "/complaints");
+});

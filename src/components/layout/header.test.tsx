@@ -45,6 +45,19 @@ describe("Header", () => {
     expect(push).toHaveBeenCalledWith("/search?q=physics");
   });
 
+  it("shows complaint suggestions while typing", async () => {
+    const user = userEvent.setup();
+    renderHeader();
+
+    await user.click(screen.getAllByRole("button", { name: "Open search" })[0]);
+    await user.type(screen.getByRole("searchbox", { name: "Search keywords" }), "complaint");
+
+    expect(screen.getByRole("option", { name: /Submit a Complaint/ })).toHaveAttribute(
+      "href",
+      "/complaints"
+    );
+  });
+
   it("renders safely without throwing when pathname is null", () => {
     getPathname.mockReturnValueOnce(null as unknown as string);
     expect(() => renderHeader()).not.toThrow();
