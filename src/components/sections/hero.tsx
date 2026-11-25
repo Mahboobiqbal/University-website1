@@ -41,11 +41,12 @@ export const Hero = () => {
 
   useEffect(() => {
     if (paused) return;
-    const timer = setInterval(() => {
+    const delay = current === 0 ? 15000 : 6500;
+    const timer = setTimeout(() => {
       setCurrent((prev) => (prev + 1) % SLIDES.length);
-    }, 6500);
-    return () => clearInterval(timer);
-  }, [paused]);
+    }, delay);
+    return () => clearTimeout(timer);
+  }, [current, paused]);
 
   return (
     <section
@@ -70,7 +71,7 @@ export const Hero = () => {
                 muted
                 loop
                 playsInline
-                preload="metadata"
+                preload="auto"
                 poster="/class-picture.jpg"
                 className="h-full w-full object-cover"
                 aria-label="University of Swat student video"
