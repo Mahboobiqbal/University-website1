@@ -11,6 +11,7 @@ import { TabsList } from "@/components/sections/tabs-list";
 import { QuickAccessSection } from "@/components/sections/quick-access";
 import { VCMessageSection } from "@/components/sections/vc-message";
 import { AdmissionsSection } from "@/components/sections/admissions";
+import { UniversityGuideMapSection } from "@/components/sections/whisper-map";
 
 export default function HomePage() {
   return (
@@ -22,6 +23,7 @@ export default function HomePage() {
       <StatsSection />
       <EventsSection />
       <AdmissionsSection compact />
+      <UniversityGuideMapSection />
       <NewsSection />
       <TabsList />
       <QuickAccessSection />

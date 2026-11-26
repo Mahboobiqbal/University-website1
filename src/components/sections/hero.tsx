@@ -95,9 +95,20 @@ export const Hero = () => {
 
       {/* Main Content Area */}
       <div className="relative z-10 max-w-[1440px] w-full mx-auto px-5 sm:px-8 lg:px-12 flex-1 flex flex-col justify-end pt-28 sm:pt-36 lg:pt-40 xl:pt-[160px] pb-20 sm:pb-20 lg:pb-24">
-        <div className="max-w-[720px]">
+        <div className="max-w-[980px]">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="mb-5 flex items-center gap-3 sm:gap-4"
+          >
+            <span aria-hidden="true" className="h-px w-10 sm:w-14 bg-white/60" />
+            <span className="text-[11px] sm:text-xs font-medium uppercase tracking-[0.28em] text-white/85">
+              {language === "ur" ? "یونیورسٹی آف سوات" : "University of Swat · Est. 2010"}
+            </span>
+          </motion.div>
           <h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white text-balance leading-[1.12] sm:leading-[1.08] mb-3 sm:mb-5 tracking-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[86px] font-light text-white text-balance leading-[1.06] sm:leading-[1.04] mb-4 sm:mb-6 tracking-tight drop-shadow-[0_2px_18px_rgba(0,0,0,0.35)]"
           >
             {language === "ur" ? "معیار کی تعلیم، وابستگی کے ساتھ" : HERO.headline}
           </h1>
@@ -105,7 +116,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.15 }}
-            className="text-sm sm:text-base lg:text-lg text-white/90 mb-5 sm:mb-8 max-w-[520px] font-light leading-relaxed drop-shadow-sm"
+            className="text-base sm:text-lg lg:text-xl text-white/90 mb-6 sm:mb-10 max-w-[640px] font-light leading-relaxed drop-shadow-sm"
           >
             {language === "ur"
               ? "جامعہ سوات 2010 میں قائم ہوئی اور سوات اور وسیع علاقے کو تعلیم، تحقیق اور کمیونٹی کی خدمات فراہم کرتی ہے۔"
@@ -117,12 +128,12 @@ export const Hero = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 max-w-sm sm:max-w-none"
           >
-            <Button href="/about" variant="secondary" size="lg" className="w-full sm:w-auto text-center justify-center">
+            <Button href="/about" variant="secondary" size="lg" className="w-full sm:w-auto text-center justify-center px-8 sm:px-10 text-base sm:text-lg">
               {language === "ur" ? "مزید پڑھیں" : "Learn More"}
             </Button>
             <Link
               href="/programs"
-              className="inline-flex items-center justify-center px-6 sm:px-8 py-3 rounded-none text-base sm:text-lg font-medium border border-white text-white hover:bg-white hover:text-charcoal transition-colors text-center backdrop-blur-xs bg-black/10 sm:bg-transparent"
+              className="inline-flex items-center justify-center px-8 sm:px-10 py-3.5 rounded-none text-base sm:text-lg font-medium border border-white text-white hover:bg-white hover:text-charcoal transition-colors text-center backdrop-blur-xs bg-black/10 sm:bg-transparent"
             >
               {language === "ur" ? "تعلیمی پروگرام" : "Explore Programs"}
             </Link>

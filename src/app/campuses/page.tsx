@@ -26,7 +26,7 @@ const campuses = [
     description:
       "The Women Campus brings academic opportunities closer to women students in Swat. Check the university's official updates for current programs and facilities.",
     image:
-      "https://images.pexels.com/photos/1438072/pexels-photo-1438072.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "/uos/campus-detail.jpg",
     href: "https://uswat.edu.pk/women-campus/",
   },
   {
@@ -35,7 +35,7 @@ const campuses = [
     category: "Campus information",
     description:
       "The University of Swat publishes information about its Shangla Campus. Refer to the official campus page for current announcements and details.",
-    image: "https://images.pexels.com/photos/97799/pexels-photo-97799.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/uos/campus-main.jpg",
     href: "https://uswat.edu.pk/shangla-campus/",
   },
 ];

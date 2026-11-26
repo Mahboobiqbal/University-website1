@@ -2,12 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  ArrowLeft,
   Building2,
   Download,
   ExternalLink,
   Mail,
-  Landmark,
   Microscope,
 } from "lucide-react";
 import { InnerPageLayout } from "@/components/layout/inner-page-layout";
@@ -65,12 +63,13 @@ export default async function FacultyProfilePage({ params }: Props) {
             <aside>
               <div className="relative mx-auto aspect-[4/5] w-full max-w-[340px] overflow-hidden bg-[#233623] shadow-[0_10px_30px_rgba(27,35,27,0.12)]">
                 {faculty.image ? (
-                  <Image
-                    src={faculty.image}
-                    alt={faculty.name}
-                    fill
-                    priority
-                    unoptimized={Boolean(faculty.image?.includes("uswat.edu.pk"))}
+                <Image
+                  src={faculty.image}
+                  alt={faculty.name}
+                  fill
+                  priority
+                  unoptimized={Boolean(faculty.image?.includes("uswat.edu.pk"))}
+                  referrerPolicy="no-referrer"
                     sizes="(max-width: 1024px) 280px, 340px"
                     className="object-cover object-top"
                   />

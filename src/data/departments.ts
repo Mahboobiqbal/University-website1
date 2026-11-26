@@ -98,7 +98,7 @@ export const DEPARTMENTS: Department[] = ALL_DETAILS.map((dept) => ({
   })),
   image:
     imageMap[dept.id] ||
-    "https://images.pexels.com/photos/3754756/pexels-photo-3754756.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "/uos/campus-main.jpg",
   faculty: facultyByDept[dept.id] || "",
   href: `/department/${dept.id}`,
 }));

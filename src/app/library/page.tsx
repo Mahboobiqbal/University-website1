@@ -5,7 +5,7 @@ import { InnerPageLayout } from "@/components/layout/inner-page-layout";
 export const metadata = {
   title: "Central Library | University of Swat",
   description:
-    "Contact the University of Swat Central Library and access the HEC Digital Library.",
+    "Contact the University of Swat Central Library for research support, borrowing, and library services.",
 };
 
 export default function LibraryPage() {
@@ -25,14 +25,6 @@ export default function LibraryPage() {
               university lists library staff and contact details through its official library
               office page.
             </p>
-            <a
-              href="http://www.digitallibrary.edu.pk/uniofswat.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-flex w-fit items-center gap-2 rounded-md bg-brand px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-brand-hover"
-            >
-              Open HEC Digital Library <ArrowUpRight aria-hidden="true" size={16} />
-            </a>
           </div>
           <aside className="flex flex-col justify-between bg-[#233623] p-8 text-white sm:p-10 lg:col-span-5 lg:p-12">
             <LibraryBig aria-hidden="true" size={32} className="text-white/75" />

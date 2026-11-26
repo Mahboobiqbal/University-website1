@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUpRight, Quote } from "lucide-react";
 import { InnerPageLayout } from "@/components/layout/inner-page-layout";
 import { VC_MESSAGE } from "@/data/home";
@@ -41,14 +42,22 @@ export default function ViceChancellorPage() {
             community engagement. The full message and current university updates are available
             through the official website.
           </p>
-          <a
-            href="https://uswat.edu.pk/vice-chancellors-message-2/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-flex w-fit items-center gap-2 text-sm font-medium text-brand transition-colors hover:text-brand-hover"
-          >
-            Read the official message <ArrowUpRight aria-hidden="true" size={16} />
-          </a>
+          <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
+            <a
+              href="https://uswat.edu.pk/vice-chancellors-message-2/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex w-fit items-center gap-2 text-sm font-medium text-brand transition-colors hover:text-brand-hover"
+            >
+              Read the official message <ArrowUpRight aria-hidden="true" size={16} />
+            </a>
+            <Link
+              href="/history"
+              className="inline-flex w-fit items-center gap-2 text-sm font-medium text-brand transition-colors hover:text-brand-hover"
+            >
+              History &amp; former Vice Chancellors <ArrowUpRight aria-hidden="true" size={16} />
+            </Link>
+          </div>
         </div>
       </article>
     </InnerPageLayout>

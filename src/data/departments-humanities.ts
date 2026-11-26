@@ -7,6 +7,11 @@ export interface DepartmentDetail {
   description: string;
   vision: string;
   mission: string;
+  objective?: string;
+  achievements?: string[];
+  labs?: { name: string; description: string; image: string }[];
+  careerPaths?: string[];
+  admissionNotes?: string[];
   programs: { name: string; level: string }[];
   curriculum: { title: string; url: string }[];
   facultyMembers: FacultyMemberProfile[];
@@ -36,31 +41,31 @@ export const DEPARTMENTS_HUMANITIES: DepartmentDetail[] = [
         name: "Dr. Syed Hanif Rasool",
         title: "Associate Professor & Chairman",
         email: "syedhanifrasool@uswat.edu.pk",
-        image: "https://uswat.edu.pk/wp-content/uploads/2025/10/eng-o1-150x150.png",
+        image: "/faculty/eng-o1-150x150.png",
       },
       {
         name: "Dr. Syed Shujaat Ali",
         title: "Associate Professor",
         email: "shujaat@uswat.edu.pk",
-        image: "https://uswat.edu.pk/wp-content/uploads/2025/10/shujaat-ali-118x150-removebg-preview.png",
+        image: "/faculty/shujaat-ali-118x150-removebg-preview.png",
       },
       {
         name: "Dr. Imdad Ullah Khan",
         title: "Assistant Professor",
         email: "imdad.khan@uswat.edu.pk",
-        image: "https://uswat.edu.pk/wp-content/uploads/2020/08/Dr.-Imdad-Ullah-Photo-01-150x150.png",
+        image: "/faculty/Dr.-Imdad-Ullah-Photo-01-150x150.png",
       },
       {
         name: "Mr. Zakirullah",
         title: "Lecturer",
         email: "zakirsalarkale@gmail.com",
-        image: "https://uswat.edu.pk/wp-content/uploads/2025/10/zakir-150x150-removebg-preview.png",
+        image: "/faculty/zakir-150x150-removebg-preview.png",
       },
       {
         name: "Mr. Sadiq Hussain",
         title: "Lecturer",
         email: "sadiqhussain@uswat.edu.pk",
-        image: "https://uswat.edu.pk/wp-content/uploads/2025/10/SADIQ-150x150-removebg-preview.png",
+        image: "/faculty/SADIQ-150x150-removebg-preview.png",
       },
     ],
     contact: { email: "defl@uswat.edu.pk", office: "" },
@@ -111,13 +116,13 @@ export const DEPARTMENTS_HUMANITIES: DepartmentDetail[] = [
         name: "Dr. Yahya Khan",
         title: "Assistant Professor",
         email: "yahya@uswat.edu.pk",
-        image: "https://uswat.edu.pk/wp-content/uploads/2025/10/Dr.-Yahya-Khan-Lecturer-150x150-removebg-preview.png",
+        image: "/faculty/Dr.-Yahya-Khan-Lecturer-150x150-removebg-preview.png",
       },
       {
         name: "Dr. Javed Khan",
         title: "Assistant Professor",
         email: "javedkhan@uswat.edu.pk",
-        image: "https://uswat.edu.pk/wp-content/uploads/2025/10/Dr.-Javed-Khan-Lecturer-150x150-1-e1759733549471.jpg",
+        image: "/faculty/Dr.-Javed-Khan-Lecturer-150x150-1-e1759733549471.jpg",
       },
       {
         name: "Dr. Muhammad Noman",
@@ -137,13 +142,13 @@ export const DEPARTMENTS_HUMANITIES: DepartmentDetail[] = [
         name: "Dr. Zia Ud Din",
         title: "Assistant Professor",
         email: "zia@uswat.edu.pk",
-        image: "https://uswat.edu.pk/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-24-at-14.28.36-150x150.jpeg",
+        image: "/faculty/WhatsApp-Image-2025-11-24-at-14.28.36-150x150.jpeg",
       },
       {
         name: "Dr. Fazle Haq",
         title: "Lecturer",
         email: "fazlehaq@uswat.edu.pk",
-        image: "https://uswat.edu.pk/wp-content/uploads/2024/08/fazalHaq-e1722497329404-150x150.jpg",
+        image: "/faculty/fazalHaq-e1722497329404-150x150.jpg",
       },
     ],
     contact: { email: "", office: "" },
@@ -165,7 +170,7 @@ export const DEPARTMENTS_HUMANITIES: DepartmentDetail[] = [
         name: "Dr. Rafi Ullah",
         title: "In-charge",
         email: "rafiullah@uswat.edu.pk",
-        image: "https://uswat.edu.pk/wp-content/uploads/2022/07/WhatsApp-Image-2022-07-22-at-12.14.49-PM-150x149.jpeg",
+        image: "/faculty/WhatsApp-Image-2022-07-22-at-12.14.49-PM-150x149.jpeg",
       },
     ],
     contact: { email: "", office: "" },
@@ -191,37 +196,37 @@ export const DEPARTMENTS_HUMANITIES: DepartmentDetail[] = [
         name: "Mr. Amjad Hilal",
         title: "Associate Professor and Chairman",
         email: "amjadhilal@uswat.edu.pk",
-        image: "https://uswat.edu.pk/wp-content/uploads/2025/10/amjadhilal-e1759136720703-removebg-preview-150x150.png",
+        image: "/faculty/amjadhilal-e1759136720703-removebg-preview-150x150.png",
       },
       {
         name: "Dr. Lutfullah Saqib",
         title: "Professor",
         email: "lutfullahsaqib@uswat.edu.pk",
-        image: "https://uswat.edu.pk/wp-content/uploads/2025/10/lutfullah-removebg-preview.png",
+        image: "/faculty/lutfullah-removebg-preview.png",
       },
       {
         name: "Mr. Muhammad Islahuddin",
         title: "Assistant Professor",
         email: "m.islahuddin@uswat.edu.pk",
-        image: "https://uswat.edu.pk/wp-content/uploads/2025/09/isLah-e1759136834775-150x150.jpg",
+        image: "/faculty/isLah-e1759136834775-150x150.jpg",
       },
       {
         name: "Mr. Qazi Ubaidullah",
         title: "Assistant Professor",
         email: "obaidullah@uswat.edu.pk",
-        image: "https://uswat.edu.pk/wp-content/uploads/2025/10/ubaid-150x150-removebg-preview.png",
+        image: "/faculty/ubaid-150x150-removebg-preview.png",
       },
       {
         name: "Ms. Nazish Inayat",
         title: "Lecturer",
         email: "nazish@uswat.edu.pk",
-        image: "https://uswat.edu.pk/wp-content/uploads/2020/01/214-2140811_computer-icons-woman-female-silhouette-female-silhouette-icon.png",
+        image: "/faculty/214-2140811_computer-icons-woman-female-silhouette-female-silhouette-icon.png",
       },
       {
         name: "Ms. Kalsoom Bibi",
         title: "Lecturer",
         email: "kalsoom@uswat.edu.pk",
-        image: "https://uswat.edu.pk/wp-content/uploads/2020/01/214-2140811_computer-icons-woman-female-silhouette-female-silhouette-icon.png",
+        image: "/faculty/214-2140811_computer-icons-woman-female-silhouette-female-silhouette-icon.png",
       },
     ],
     contact: { email: "law.sharia@uswat.edu.pk", office: "" },
@@ -242,7 +247,7 @@ export const DEPARTMENTS_HUMANITIES: DepartmentDetail[] = [
         name: "Dr. Lala Rukh",
         title: "Associate Professor in Finance",
         email: "lalarukh@uswat.edu.pk",
-        image: "https://uswat.edu.pk/wp-content/uploads/2020/01/214-2140811_computer-icons-woman-female-silhouette-female-silhouette-icon.png",
+        image: "/faculty/214-2140811_computer-icons-woman-female-silhouette-female-silhouette-icon.png",
       },
     ],
     contact: { email: "", office: "" },

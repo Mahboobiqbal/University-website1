@@ -37,17 +37,30 @@ export default function AboutPage() {
               {ABOUT.heading}
             </h1>
             <p className="max-w-2xl text-lg leading-relaxed text-gray-600">{ABOUT.intro}</p>
-            <Link
-              href="/vice-chancellor"
-              className="group mt-8 inline-flex w-fit items-center gap-3 border-b border-brand pb-2 text-sm font-medium text-brand transition-colors hover:text-brand-hover"
-            >
-              Read the Vice Chancellor&apos;s message
-              <ArrowRight
-                aria-hidden="true"
-                size={16}
-                className="transition-transform group-hover:translate-x-1"
-              />
-            </Link>
+            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
+              <Link
+                href="/vice-chancellor"
+                className="group inline-flex w-fit items-center gap-3 border-b border-brand pb-2 text-sm font-medium text-brand transition-colors hover:text-brand-hover"
+              >
+                Read the Vice Chancellor&apos;s message
+                <ArrowRight
+                  aria-hidden="true"
+                  size={16}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </Link>
+              <Link
+                href="/history"
+                className="group inline-flex w-fit items-center gap-3 border-b border-brand pb-2 text-sm font-medium text-brand transition-colors hover:text-brand-hover"
+              >
+                Explore our history
+                <ArrowRight
+                  aria-hidden="true"
+                  size={16}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </Link>
+            </div>
           </div>
           <div className="relative min-h-[300px] bg-[#233623] sm:min-h-[420px]">
             <Image
